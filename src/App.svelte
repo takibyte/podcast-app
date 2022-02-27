@@ -8,28 +8,28 @@
     <!-- transitionable container, potential creatable component -->
     <div class="container_two">
         <div class="episode">
-            <div class="ep_img"><img src="src/assets/tds.jpeg"></div>
+            <div class="ep_img"><img src="public/tds.jpeg"></div>
             <div class="ep_txt">
                 <span>284 - Prozac Play-Doh</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
             </div>
         </div>
         <div class="episode">
-            <div class="ep_img"><img src="src/assets/tds.jpeg"></div>
+            <div class="ep_img"><img src="public/tds.jpeg"></div>
             <div class="ep_txt">
                 <span>284 - Prozac Play-Doh</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
             </div>
         </div>
         <div class="episode">
-            <div class="ep_img"><img src="src/assets/tds.jpeg"></div>
+            <div class="ep_img"><img src="public/tds.jpeg"></div>
             <div class="ep_txt">
                 <span>284 - Prozac Play-Doh</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
             </div>
         </div>
         <div class="episode">
-            <div class="ep_img"><img src="src/assets/tds.jpeg"></div>
+            <div class="ep_img"><img src="public/tds.jpeg"></div>
             <div class="ep_txt">
                 <span>284 - Prozac Play-Doh</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
