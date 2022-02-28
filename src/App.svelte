@@ -1,5 +1,13 @@
 <script>
+import { onMount } from 'svelte';
 
+let pod = [];
+
+fetch('data.json')
+    .then((response) => response.json())
+    .then((data) => {
+        pod = JSON.parse(data);
+    });
 </script>
 
 <div class="top_container">
@@ -28,13 +36,7 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
             </div>
         </div>
-        <div class="episode">
-            <div class="ep_img"><img src="./tds.jpeg"></div>
-            <div class="ep_txt">
-                <span>284 - Prozac Play-Doh</span>
-                <p>Lorem ipsum dolor sit amet consectetur adipisic Lorem ipsum dolor sit amet consectetur adipisic adipisi</p>
-            </div>
-        </div>
+
     </div>
 
     <div class="player">
