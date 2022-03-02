@@ -1,17 +1,44 @@
 <script>
-import { podcast } from './lib/data.json';
+import json from './lib/data.json';
+import { fly } from 'svelte/transition';
 
+let visible = false;
+
+let icon = "";
+let name = "";
+let episode = "";
+
+function toggle_visible() {
+    visible = !visible;
+}
+
+function display_episode() {
+
+
+
+    toggle_visible();
+}
 
 </script>
 
-<h1>pode</h1>
+<h1>podapp</h1>
+
+{#if visible}
+    <div class="overlay" on:click={toggle_visible}
+    in:fly="{{ y: 600, duration: 500 }}"
+    out:fly="{{ y: 600, duration: 500 }}">
+    <h1>{name}</h1>
+    <span>{episode}</span>
+
+    </div>
+{/if}
 
 <div class="top_container">
     <!-- transitionable container, potential creatable component -->
     <div class="container_two">
-        {#each podcast as ep}
-            <div class="episode">
-                <div class="ep_img"><img src="./tds.jpeg"></div>
+        {#each json.podcast as ep}
+            <div class="episode" on:click={display_episode}>
+                <div class="ep_img"><img src={ep.Image}></div>
                 <div class="ep_txt">
                     <span>{ep.Name}</span>
                     <p>{ep.Episode}</p>
@@ -46,6 +73,16 @@ import { podcast } from './lib/data.json';
 
     span {
         font-size: .8rem;
+    }
+
+    .overlay {
+        z-index: 3;
+        background-color: black;
+        position: fixed;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        transition: height .5s;
     }
 
     .top_container {
