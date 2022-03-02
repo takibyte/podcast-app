@@ -1,165 +1,88 @@
 <script>
+import { visible } from './lib/stores.js';
+import Episodes from './lib/Episodes.svelte';
+import Display from './lib/Display.svelte';
 import json from './lib/data.json';
-import { fly } from 'svelte/transition';
-
-let visible = false;
-
-let icon = "";
-let name = "";
-let episode = "";
 
 function toggle_visible() {
-    visible = !visible;
+    $visible = !$visible;
 }
-
-function display_episode() {
-
-
-
-    toggle_visible();
-}
-
 </script>
 
 <h1>podapp</h1>
 
-{#if visible}
-    <div class="overlay" on:click={toggle_visible}
-    in:fly="{{ y: 600, duration: 500 }}"
-    out:fly="{{ y: 600, duration: 500 }}">
-    <h1>{name}</h1>
-    <span>{episode}</span>
-
-    </div>
+{#if $visible}
+    <Display/>
 {/if}
 
-<div class="top_container">
-    <!-- transitionable container, potential creatable component -->
-    <div class="container_two">
+<div class="top_grid">
+    <div class="ep_grid">
         {#each json.podcast as ep}
-            <div class="episode" on:click={display_episode}>
-                <div class="ep_img"><img src={ep.Image}></div>
-                <div class="ep_txt">
-                    <span>{ep.Name}</span>
-                    <p>{ep.Episode}</p>
-                </div>
-            </div>
+            <svelte:component this={Episodes} 
+            ep_img={ep.Image} 
+            ep_name={ep.Name}
+            ep_episode={ep.Episode} />
         {/each}
     </div>
 
-    <div class="player">
-        <span class="btn" style="line-height: 42px;">▶︎</span>
-    </div>
     <div class="tabs">
-        <span class="btn">❖</span>
-        <span class="btn">❖</span>
-        <span class="btn">❖</span>
-        <span class="btn">❖</span>
+        <span class="btn" on:click={toggle_visible}>⚀</span>
+        <span class="btn">⚁</span>
+        <span class="btn">⚂</span>
+        <span class="btn">⚃</span>
     </div>
-
 </div>
 
 <style>
-    h1 {
-        font-size: 1.5rem;
-        text-align: center;
-        margin: 0;
-        padding: 5px;
-    }
+h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+}
 
-    p {
-        font-size: .6rem;
-    }
+p {
+    font-size: .6rem;
+}
 
-    span {
-        font-size: .8rem;
-    }
+span {
+    font-size: .8rem;
+}
 
-    .overlay {
-        z-index: 3;
-        background-color: black;
-        position: fixed;
-        bottom: 0;
-        height: 100%;
-        width: 100%;
-        transition: height .5s;
-    }
+.top_grid {
+    display: grid;
+    width: auto;
+    height: auto;
+    grid-auto-flow: row;
+}
 
-    .top_container {
-        display: grid;
-        width: auto;
-        height: auto;
-        grid-auto-flow: row;
-    }
+.ep_grid {
+    display: grid;
+    width: auto;
+    height: auto;
+    grid-auto-flow: row;
+    row-gap: 5px;
+    padding: 5px;
+}
 
-    .container_two {
-        display: grid;
-        width: auto;
-        height: auto;
-        grid-auto-flow: row;
-        row-gap: 5px;
-        padding: 5px;
-    }
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: black;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    line-height: 45px;
+    position: fixed;
+    bottom: 0;
+}
 
-    .episode {
-        display: grid;
-        grid-area: "img text";
-        grid-template-columns: 80px auto;
-        background-color: #343648;
-        width: 100%;
-        height: 80px;
-        border-radius: 10px;
-    }
+.btn {
+    font-size: 2.5rem;
+}
 
-    .episode:hover {
-        opacity: 0.8;
-        cursor: pointer;
-    }
-
-    .ep_txt {
-        display: flex;
-        flex-flow: column wrap;
-        padding: 5px;
-    }
-
-    img {
-        max-width: 70px;
-        border-radius: 10px;
-        padding: 5px;
-    }
-
-    .player {
-        display: grid;
-        grid-template-columns: 1fr;
-        background-color: black;
-        height: 50px;
-        width: 100%;
-        text-align: center;
-        line-height: 50px;
-        position: fixed;
-        bottom: 50px;
-        border-bottom: 1px solid white;
-    }
-
-    .tabs {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        background-color: black;
-        height: 50px;
-        width: 100%;
-        text-align: center;
-        line-height: 50px;
-        position: fixed;
-        bottom: 0;
-    }
-
-    .btn {
-        font-size: 2.5rem;
-    }
-
-    .btn:hover {
-        opacity: 0.8;
-        cursor: pointer;
-    }
-
+.btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
 </style>
