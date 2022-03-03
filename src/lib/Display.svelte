@@ -46,7 +46,7 @@ img {
 
 svg {
     width: 90px;
-    margin: 20px;
+    margin: 30px;
 }
 
 svg:hover {
