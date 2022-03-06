@@ -108,14 +108,8 @@ span {
 }
 
 audio {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 0px;
-    height: 2.5rem;
-    
-}
-audio::-webkit-media-controls-enclosure {
-    background-color: #fff;
+    width: 90vw;
+    max-width: 300px;
 }
 
 </style>
