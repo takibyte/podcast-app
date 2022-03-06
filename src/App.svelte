@@ -3,7 +3,18 @@ import { visible } from './lib/stores.js';
 import Episodes from './lib/Episodes.svelte';
 import Display from './lib/Display.svelte';
 import json from './lib/data.json';
-// import rss from './lib/rss-parse.js';
+import { parse } from 'rss-to-json';
+
+async function get_rss() {
+    const res = await parse(`https://feeds.megaphone.fm/TPC2985326322`);
+    const rss = await res;
+//   console.log(JSON.stringify(rss, null, 3));
+    return rss;
+};
+
+let promise = get_rss();
+
+
 
 
 function toggle_visible() {
@@ -19,12 +30,22 @@ function toggle_visible() {
 
 <div class="top_grid">
     <div class="ep_grid">
-        {#each json.podcast as ep}
+        <!-- {#each json.podcast as ep}
             <svelte:component this={Episodes} 
             ep_img={ep.Image} 
             ep_name={ep.Name}
             ep_episode={ep.Episode} />
-        {/each}
+        {/each} -->
+        {#await promise then rss}
+            {#each rss.items as pod}
+            <svelte:component this={Episodes} 
+                pod_img={rss.image}
+                pod_episode={pod.title}
+                pod_name={rss.title}
+                pod_description={pod.description}
+            />
+            {/each}
+        {/await}
     </div>
 
     <div class="tabs">

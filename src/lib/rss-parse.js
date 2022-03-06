@@ -1,18 +1,14 @@
-import Parser from 'rss-parser';
+import { parse } from 'rss-to-json';
 
-export let rss;
+// async await
 
-// Note: some RSS feeds can't be loaded in the browser due to CORS security.
-// To get around this, you can use a proxy.
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+(async () => {
+  const rss = await parse(`https://feeds.megaphone.fm/TPC2985326322`);
+  // console.log(JSON.stringify(rss, null, 3));
+})();
 
-let parser = new Parser();
-parser.parseURL(CORS_PROXY + 'https://www.reddit.com/.rss', function(err, feed) {
-  if (err) throw err;
-  console.log(feed.title);
-  feed.items.forEach(function(entry) {
-    console.log(entry.title + ':' + entry.link);
-  })
-});
-
-export default rss;
+// parse('https://feeds.megaphone.fm/TPC2985326322')
+//   .then(response => {
+//     rss = response;
+//     // console.log(JSON.stringify(rss, null, 3));
+//   });

@@ -1,26 +1,28 @@
 <script>
-import { visible, icon, name, episode } from './stores.js';
-export let ep_img;
-export let ep_name;
-export let ep_episode;
+import { visible, icon, name, episode, description } from './stores.js';
+export let pod_img;
+export let pod_name;
+export let pod_episode;
+export let pod_description;
 
 function toggle_visible() {
     $visible = !$visible;
 }
 
 function display_ep() {
-    $icon =  ep_img;
-    $name = ep_name;
-    $episode = ep_episode;
+    $icon =  pod_img;
+    $name = pod_name;
+    $episode = pod_episode;
+    $description = pod_description;
     toggle_visible()
 }
 </script>
 
 <div class="episode" on:click={display_ep}>
-    <div class="ep_img"><img src={ep_img}></div>
+    <div class="ep_img"><img src={pod_img}></div>
     <div class="ep_txt">
-        <span>{ep_name}</span>
-        <p>{ep_episode}</p>
+        <span>{pod_episode}</span>
+        <p>{pod_name}</p>
     </div>
 </div>
 
