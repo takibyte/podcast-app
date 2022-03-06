@@ -22,7 +22,7 @@ function display_ep() {
     <div class="ep_img"><img src={pod_img}></div>
     <div class="ep_txt">
         <span>{pod_episode}</span>
-        <p>{pod_name}</p>
+        <span class="name">{pod_name}</span>
     </div>
 </div>
 
@@ -30,11 +30,12 @@ function display_ep() {
 .episode {
     display: grid;
     grid-area: "img text";
-    grid-template-columns: 60px auto;
-    background-color: #343648;
+    grid-template-columns: 65px auto;
+    background-color: #000;
     width: 100%;
-    height: 60px;
-    border-radius: 10px;
+    height: 70px;
+    /* border-radius: 5px; */
+    border-bottom: 1px solid white;
 }
 
 .episode:hover {
@@ -49,16 +50,18 @@ function display_ep() {
 }
 
 img {
-    max-width: 50px;
+    max-width: 60px;
     border-radius: 10px;
     padding: 5px;
 }
 
-p {
-    font-size: .6rem;
+span {
+    font-size: .9rem;
+    width: 100%;
 }
 
-span {
+.name {
     font-size: .8rem;
+    font-weight: 300;
 }
 </style>

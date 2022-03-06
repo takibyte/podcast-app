@@ -9,15 +9,18 @@ function toggle_visible() {
 </script>
 
 
-<div class="overlay" on:click={toggle_visible}
+<div class="overlay"
     in:fly="{{ y: 600, duration: 500 }}"
     out:fly="{{ y: 600, duration: 500 }}">
 
+    <div class="top">
+        <span class="close" on:click={toggle_visible}>⌄</span>
+    </div>
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
     <span>{$name}</span>
     <img class="play" src="./play.png"/>
-    <span class="description">{$description}</span>
+    <p class="description">{$description}</p>
 </div>
 
 <style>
@@ -28,7 +31,6 @@ function toggle_visible() {
     bottom: 0;
     height: 100%;
     width: 100%;
-    transition: height .5s;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -37,17 +39,20 @@ function toggle_visible() {
 }
 
 .description {
-    font-size: .6rem;
+    font-size: .9rem;
     text-align: left;
-    padding: 10px;
+    width: 90vw;
+    max-width: 700px;
+    /* padding: 15px; */
+    /* hyphens: auto; */
+    line-height: 1.7rem;
 }
 
 img {
-    margin: 10px;
-    width: 85vw;
+    width: 90vw;
     max-width: 300px;
-    border-radius: 20px;
-    padding: 10px;
+    border-radius: 15px;
+    padding: 5px;
 }
 
 .play {
@@ -65,11 +70,26 @@ h1 {
     font-size: 1.2rem;
     text-align: center;
     margin: 0;
-    padding: 5px;
+    padding: 10px;
 }
 
 span {
     font-size: .8rem;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+}
+
+.top {
+    width: 100vw;
+}
+
+.close {
+    font-size: 1.5rem;
+    float: left;
+    padding-left: 15px;
+}
+
+.close:hover {
+    opacity: 0.8;
+    cursor: pointer;
 }
 </style>
