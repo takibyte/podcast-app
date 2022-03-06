@@ -43,9 +43,10 @@ function toggle_visible() {
     text-align: left;
     width: 90vw;
     max-width: 700px;
-    /* padding: 15px; */
-    /* hyphens: auto; */
     line-height: 1.7rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    /* hyphens: auto; */
 }
 
 img {
