@@ -9,14 +9,11 @@ import { fade } from 'svelte/transition';
 async function get_rss() {
     const res = await parse(`https://feeds.megaphone.fm/TPC2985326322`);
     const rss = await res;
-//   console.log(JSON.stringify(rss, null, 3));
+  console.log(JSON.stringify(rss, null, 3));
     return rss;
 };
 
 let promise = get_rss();
-
-
-
 
 function toggle_visible() {
     $visible = !$visible;
@@ -38,7 +35,8 @@ function toggle_visible() {
                     pod_img={rss.image}
                     pod_episode={pod.title}
                     pod_name={rss.title}
-                    pod_description={pod.description}
+                    pod_description={pod.content}
+                    pod_mp3={pod.enclosures[0].url}
                 />
                 {/each}
             {/await}

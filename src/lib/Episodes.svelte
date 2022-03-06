@@ -1,9 +1,10 @@
 <script>
-import { visible, icon, name, episode, description } from './stores.js';
+import { visible, icon, name, episode, description, mp3 } from './stores.js';
 export let pod_img;
 export let pod_name;
 export let pod_episode;
 export let pod_description;
+export let pod_mp3;
 
 function toggle_visible() {
     $visible = !$visible;
@@ -14,6 +15,7 @@ function display_ep() {
     $name = pod_name;
     $episode = pod_episode;
     $description = pod_description;
+    $mp3 = pod_mp3;
     toggle_visible()
 }
 </script>
@@ -46,7 +48,9 @@ function display_ep() {
 .ep_txt {
     display: flex;
     flex-flow: column wrap;
-    padding: 5px;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 img {
@@ -56,12 +60,14 @@ img {
 }
 
 span {
-    font-size: .9rem;
+    font-size: 1rem;
     width: 100%;
+    padding-top: 2px;
 }
 
 .name {
     font-size: .8rem;
     font-weight: 300;
+    padding-bottom: 8px;
 }
 </style>

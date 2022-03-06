@@ -1,5 +1,5 @@
 <script>
-import { visible, icon, name, episode, description } from './stores.js';
+import { visible, icon, name, episode, description, mp3 } from './stores.js';
 import { fly } from 'svelte/transition';
 
 function toggle_visible() {
@@ -18,9 +18,18 @@ function toggle_visible() {
     </div>
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
-    <span>{$name}</span>
-    <img class="play" src="./play.png"/>
-    <p class="description">{$description}</p>
+    <span class="name">{$name}</span>
+    <div>
+        <audio controls>
+            <source src={$mp3} type="audio/mpeg">
+            <track kind="captions" />
+        </audio>
+    </div>
+    <!-- <img class="play" src="./play.png"/> -->
+
+    <div class="description" contenteditable="false" 
+    bind:innerHTML={$description}></div>
+    
 </div>
 
 <style>
@@ -43,7 +52,7 @@ function toggle_visible() {
     text-align: left;
     width: 90vw;
     max-width: 700px;
-    line-height: 1.7rem;
+    line-height: 1.5rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
     /* hyphens: auto; */
@@ -79,6 +88,10 @@ span {
     padding-bottom: 10px;
 }
 
+.name {
+    padding-bottom: 20px;
+}
+
 .top {
     width: 100vw;
 }
@@ -93,4 +106,16 @@ span {
     opacity: 0.8;
     cursor: pointer;
 }
+
+audio {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0px;
+    height: 2.5rem;
+    
+}
+audio::-webkit-media-controls-enclosure {
+    background-color: #fff;
+}
+
 </style>
