@@ -1,9 +1,10 @@
 <script>
-import { visible, icon, name, episode, description, mp3 } from './stores.js';
+import { display_visible, episodes_visible, icon, name, episode, description, mp3 } from './stores.js';
 import { fly } from 'svelte/transition';
 
-function toggle_visible() {
-    $visible = !$visible;
+function toggle_display() {
+    $episodes_visible = !$episodes_visible;
+    $display_visible = !$display_visible;
 }
 
 </script>
@@ -14,7 +15,7 @@ function toggle_visible() {
     out:fly="{{ y: 600, duration: 500 }}">
 
     <div class="top">
-        <span class="close" on:click={toggle_visible}>⌄</span>
+        <span class="close" on:click={toggle_display}>⌄</span>
     </div>
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
@@ -51,7 +52,7 @@ function toggle_visible() {
     font-size: .9rem;
     text-align: left;
     width: 90vw;
-    max-width: 700px;
+    max-width: 500px;
     line-height: 1.5rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -60,7 +61,7 @@ function toggle_visible() {
 
 img {
     width: 90vw;
-    max-width: 300px;
+    max-width: 500px;
     border-radius: 15px;
     padding: 5px;
 }
@@ -109,7 +110,7 @@ span {
 
 audio {
     width: 90vw;
-    max-width: 300px;
+    max-width: 500px;
 }
 
 </style>

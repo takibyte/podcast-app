@@ -1,34 +1,47 @@
 <script>
-import { visible } from './lib/stores.js';
+import { display_visible, home_visible, episodes_visible, shows, url_index } from './lib/stores.js';
 import Episodes from './lib/Episodes.svelte';
+import Tabs from './lib/Tabs.svelte';
 import Display from './lib/Display.svelte';
+import Home from './lib/Home.svelte';
 import json from './lib/data.json';
 import { parse } from 'rss-to-json';
 import { fade } from 'svelte/transition';
 
 async function get_rss() {
-    const res = await parse(`https://feeds.megaphone.fm/TPC2985326322`);
-    const rss = await res;
-  console.log(JSON.stringify(rss, null, 3));
+    let res = await parse($shows[$url_index].url);
+    let rss = await res;
+//   console.log(JSON.stringify(rss, null, 3));
     return rss;
 };
 
-let promise = get_rss();
 
-function toggle_visible() {
-    $visible = !$visible;
-}
+let promise;
+$: (async() => promise = await get_rss())();
+
+
+// function handle_message(event) {
+//     $url_index= event.detail;
+//     alert($url_index);
+//     get_rss();
+// }
+
 </script>
 
 <h1>podapp</h1>
 
-{#if $visible}
+{#if $home_visible}
+    <Home/>
+{/if}
+
+{#if $display_visible}
     <Display/>
 {/if}
 
-{#if !$visible}
-    <div class="top_grid" in:fade={{duration: 300}} out:fade={{duration: 500}}>
-        <div class="ep_grid">
+
+<div class="top_grid">
+    {#if $episodes_visible}
+        <div class="ep_grid" in:fade={{duration: 300}} out:fade={{duration: 500}}>
             {#await promise then rss}
                 {#each rss.items as pod}
                 <svelte:component this={Episodes} 
@@ -36,20 +49,16 @@ function toggle_visible() {
                     pod_episode={pod.title}
                     pod_name={rss.title}
                     pod_description={pod.content}
-                    pod_mp3={pod.enclosures[0].url}
+                    pod_mp3={pod.enclosures.url}
                 />
                 {/each}
             {/await}
         </div>
+    {/if}
 
-        <div class="tabs">
-            <span class="btn" on:click={toggle_visible}>⚀</span>
-            <span class="btn">⚁</span>
-            <span class="btn">⚂</span>
-            <span class="btn">⚃</span>
-        </div>
-    </div>
-{/if}
+    <Tabs/>
+</div>
+
 
 <style>
 h1 {
@@ -58,14 +67,6 @@ h1 {
     text-align: center;
     margin: 0;
     padding: 5px;
-}
-
-p {
-    font-size: .6rem;
-}
-
-span {
-    font-size: .8rem;
 }
 
 .top_grid {
@@ -81,26 +82,5 @@ span {
     height: auto;
     grid-auto-flow: row;
     /* row-gap: 3px; */
-}
-
-.tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: #1e1f29;
-    height: 50px;
-    width: 100%;
-    text-align: center;
-    line-height: 45px;
-    position: sticky;
-    bottom: 0;
-}
-
-.btn {
-    font-size: 2.5rem;
-}
-
-.btn:hover {
-    opacity: 0.8;
-    cursor: pointer;
 }
 </style>

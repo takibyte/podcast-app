@@ -1,5 +1,5 @@
 <script>
-import { visible, icon, name, episode, description, mp3 } from './stores.js';
+import { display_visible, episodes_visible, icon, name, episode, description, mp3 } from './stores.js';
 export let pod_img;
 export let pod_name;
 export let pod_episode;
@@ -7,7 +7,8 @@ export let pod_description;
 export let pod_mp3;
 
 function toggle_visible() {
-    $visible = !$visible;
+    $display_visible = !$display_visible;
+    $episodes_visible = !$episodes_visible;
 }
 
 function display_ep() {
@@ -16,7 +17,7 @@ function display_ep() {
     $episode = pod_episode;
     $description = pod_description;
     $mp3 = pod_mp3;
-    toggle_visible()
+    toggle_visible();
 }
 </script>
 
@@ -37,7 +38,7 @@ function display_ep() {
     width: 100%;
     height: 70px;
     /* border-radius: 5px; */
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #343648;
 }
 
 .episode:hover {
