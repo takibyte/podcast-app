@@ -8,23 +8,30 @@ import json from './lib/data.json';
 import { parse } from 'rss-to-json';
 import { fade } from 'svelte/transition';
 
-async function get_rss() {
-    let res = await parse($shows[$url_index].url);
-    let rss = await res;
-//   console.log(JSON.stringify(rss, null, 3));
+let promises = [];
+
+promises[0] = parse('https://feeds.megaphone.fm/TPC2985326322')
+    .then((rss) => {
+        // console.log(JSON.stringify(rss, null, 3));
+        return rss;
+    });
+
+promises[1] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+        return rss;
+    });
+
+promises[2] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+        return rss;
+    });
+
+promises[3] = parse('https://wakingup.libsyn.com/rss')
+    .then((rss) => {
     return rss;
-};
+    });
 
-
-let promise;
-$: (async() => promise = await get_rss())();
-
-
-// function handle_message(event) {
-//     $url_index= event.detail;
-//     alert($url_index);
-//     get_rss();
-// }
+console.log(promises, null, 3);
 
 </script>
 
@@ -42,14 +49,16 @@ $: (async() => promise = await get_rss())();
 <div class="top_grid">
     {#if $episodes_visible}
         <div class="ep_grid" in:fade={{duration: 300}} out:fade={{duration: 500}}>
-            {#await promise then rss}
+            {#await promises[0]}
+            <span>loading...</span>
+            {:then rss}
                 {#each rss.items as pod}
                 <svelte:component this={Episodes} 
                     pod_img={rss.image}
                     pod_episode={pod.title}
                     pod_name={rss.title}
                     pod_description={pod.content}
-                    pod_mp3={pod.enclosures.url}
+                    pod_mp3={pod.enclosures[0].url}
                 />
                 {/each}
             {/await}

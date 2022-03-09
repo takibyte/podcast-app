@@ -33,5 +33,5 @@ export let icon = writable("");
 export let name = writable("");
 export let episode = writable("");
 export let description = writable("");
-export let mp3 = writable("");
+export let mp3_url = writable("");
 export let url_index = writable(0);

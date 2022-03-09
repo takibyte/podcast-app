@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, icon, name, episode, description, mp3 } from './stores.js';
+import { display_visible, episodes_visible, icon, name, episode, description, mp3_url } from './stores.js';
 import { fly } from 'svelte/transition';
 
 function toggle_display() {
@@ -22,7 +22,7 @@ function toggle_display() {
     <span class="name">{$name}</span>
     <div>
         <audio controls>
-            <source src={$mp3} type="audio/mpeg">
+            <source src={$mp3_url} type="audio/mpeg">
             <track kind="captions" />
         </audio>
     </div>

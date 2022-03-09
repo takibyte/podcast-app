@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, icon, name, episode, description, mp3 } from './stores.js';
+import { display_visible, episodes_visible, icon, name, episode, description, mp3_url } from './stores.js';
 export let pod_img;
 export let pod_name;
 export let pod_episode;
@@ -16,7 +16,7 @@ function display_ep() {
     $name = pod_name;
     $episode = pod_episode;
     $description = pod_description;
-    $mp3 = pod_mp3;
+    $mp3_url = pod_mp3;
     toggle_visible();
 }
 </script>
