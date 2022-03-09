@@ -4,34 +4,12 @@ import Episodes from './lib/Episodes.svelte';
 import Tabs from './lib/Tabs.svelte';
 import Display from './lib/Display.svelte';
 import Home from './lib/Home.svelte';
-import json from './lib/data.json';
-import { parse } from 'rss-to-json';
-import { fade } from 'svelte/transition';
+import { promises, get_rss } from './lib/rss-parse.js';
+import { fade, fly } from 'svelte/transition';
 
-let promises = [];
+get_rss();
 
-promises[0] = parse('https://feeds.megaphone.fm/TPC2985326322')
-    .then((rss) => {
-        // console.log(JSON.stringify(rss, null, 3));
-        return rss;
-    });
-
-promises[1] = parse('https://feeds.megaphone.fm/darknetdiaries')
-    .then((rss) => {
-        return rss;
-    });
-
-promises[2] = parse('https://feeds.megaphone.fm/darknetdiaries')
-    .then((rss) => {
-        return rss;
-    });
-
-promises[3] = parse('https://wakingup.libsyn.com/rss')
-    .then((rss) => {
-    return rss;
-    });
-
-console.log(promises, null, 3);
+// console.log(promises, null, 3);
 
 </script>
 
@@ -48,8 +26,8 @@ console.log(promises, null, 3);
 
 <div class="top_grid">
     {#if $episodes_visible}
-        <div class="ep_grid" in:fade={{duration: 300}} out:fade={{duration: 500}}>
-            {#await promises[0]}
+        <div class="ep_grid" in:fly={{x: 500, duration: 500}} out:fly={{x: 500, duration: 500}}>
+            {#await promises[$url_index]}
             <span>loading...</span>
             {:then rss}
                 {#each rss.items as pod}
@@ -64,9 +42,9 @@ console.log(promises, null, 3);
             {/await}
         </div>
     {/if}
-
-    <Tabs/>
 </div>
+
+<Tabs/>
 
 
 <style>
@@ -76,13 +54,17 @@ h1 {
     text-align: center;
     margin: 0;
     padding: 5px;
+    background-color: #1e1f29;
+    position: relative;
 }
 
 .top_grid {
     display: grid;
     width: auto;
     height: auto;
+    min-height: 100vh;
     grid-auto-flow: row;
+    background-color: #000;
 }
 
 .ep_grid {
@@ -90,6 +72,7 @@ h1 {
     width: auto;
     height: auto;
     grid-auto-flow: row;
-    /* row-gap: 3px; */
+    position: relative;
+    z-index: 2;
 }
 </style>

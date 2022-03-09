@@ -1,10 +1,14 @@
 <script>
-import { display_visible, episodes_visible, icon, name, episode, description, mp3_url } from './stores.js';
+import { display_visible, episodes_visible, icon, name, episode, description, mp3_url, home_visible } from './stores.js';
 import { fly } from 'svelte/transition';
 
 function toggle_display() {
-    $episodes_visible = !$episodes_visible;
-    $display_visible = !$display_visible;
+    if ($display_visible && !$home_visible) {
+        $episodes_visible = !$episodes_visible;
+        $display_visible = !$display_visible;
+    } else {
+        $display_visible = !$display_visible;
+    }
 }
 
 </script>

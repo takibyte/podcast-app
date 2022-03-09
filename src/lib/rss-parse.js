@@ -1,18 +1,48 @@
 import { parse } from 'rss-to-json';
-import { resolveConfig } from 'vite';
 
-// async await
+export let promises = [];
 
-// (async () => {
-//   const rss = await parse(`https://feeds.megaphone.fm/TPC2985326322`);
-//   // console.log(JSON.stringify(rss, null, 3));
-// })();
+export function get_rss() {
 
-// parse('https://feeds.megaphone.fm/TPC2985326322')
-//   .then(response => {
-//     rss = response;
-//     // console.log(JSON.stringify(rss, null, 3));
-//   });
+  promises[0] = parse('https://feeds.megaphone.fm/TPC2985326322')
+    .then((rss) => {
+      // console.log(JSON.stringify(rss, null, 3));
+      return rss;
+    });
 
-let promise = parse('https://feeds.megaphone.fm/darknetdiaries')
-  .then((rss) => rss);
+  promises[1] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+      return rss;
+    });
+
+  promises[2] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+      return rss;
+    });
+
+  promises[3] = parse('https://wakingup.libsyn.com/rss')
+    .then((rss) => {
+      return rss;
+    });
+
+  promises[4] = parse('https://feeds.megaphone.fm/TPC2985326322')
+    .then((rss) => {
+      // console.log(JSON.stringify(rss, null, 3));
+      return rss;
+    });
+
+  promises[5] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+      return rss;
+    });
+
+  promises[6] = parse('https://feeds.megaphone.fm/darknetdiaries')
+    .then((rss) => {
+      return rss;
+    });
+
+  promises[7] = parse('https://wakingup.libsyn.com/rss')
+    .then((rss) => {
+      return rss;
+    });
+}

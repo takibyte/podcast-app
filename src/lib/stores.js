@@ -1,8 +1,27 @@
 /* eslint-disable*/
 import { writable } from 'svelte/store';
 
-export let shows = writable(
-    [
+export let shows = [
+        {
+            name: "The Tim Dillon Show",
+            img: "./tds.jpeg",
+            url: "https://feeds.megaphone.fm/TPC2985326322"
+        },
+        {
+            name: "Darknet Diaries",
+            img: "./dd.jpeg",
+            url: "https://feeds.megaphone.fm/darknetdiaries"
+        },
+        {
+            name: "Lex Fridman Podcast",
+            img: "./lfp.jpeg",
+            url: "https://lexfridman.com/feed/podcast/"
+        },
+        {
+            name: "Making Sense with Sam Harris",
+            img: "ms.jpeg",
+            url: "https://wakingup.libsyn.com/rss"
+        },
         {
             name: "The Tim Dillon Show",
             img: "./tds.jpeg",
@@ -23,8 +42,7 @@ export let shows = writable(
             img: "ms.jpeg",
             url: "https://wakingup.libsyn.com/rss"
         }
-    ]
-)
+]
 
 export let home_visible = writable(true);
 export let display_visible = writable(false);

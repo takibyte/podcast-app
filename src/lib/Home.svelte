@@ -1,13 +1,10 @@
 <script>
-import { createEventDispatcher } from 'svelte';
-import json from './data.json';
 import { shows, url_index, display_visible, home_visible, episodes_visible } from './stores';
-
-// const dispatch = createEventDispatcher();
+import { fade, fly } from 'svelte/transition';
 
 function toggle_visible() {
-    $home_visible = !home_visible;
     $episodes_visible = !$episodes_visible;
+    $home_visible = !home_visible;
 }
 
 function display_episodes(index) {
@@ -17,8 +14,8 @@ function display_episodes(index) {
 
 </script>
 
-<div class="shows">
-    {#each $shows as show, index}
+<div class="shows" in:fly={{x: -500, duration: 500}} out:fly={{x: -500, duration: 500}}>
+    {#each shows as show, index}
         <img src={show.img} on:click={() => display_episodes(index)}>
     {/each}
 </div>
@@ -31,6 +28,8 @@ function display_episodes(index) {
     background-color: #000;
     width: 100%;
     height: auto;
+    position: relative;
+    z-index: 1;
     /* border-radius: 5px; */
     /* border-bottom: 1px solid #343648; */
 }
