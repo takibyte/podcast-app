@@ -13,7 +13,7 @@ get_rss();
 
 </script>
 
-<h1>podapp</h1>
+<span class="header">podapp</span>
 
 {#if $home_visible}
     <Home/>
@@ -48,14 +48,18 @@ get_rss();
 
 
 <style>
-h1 {
+.header {
+    display: grid;
     font-weight: 300;
     font-size: 1.5rem;
     text-align: center;
-    margin: 0;
-    padding: 5px;
+    height: 50px;
+    line-height: 45px;
+    width: 100%;
     background-color: #1e1f29;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .top_grid {
@@ -73,6 +77,6 @@ h1 {
     height: auto;
     grid-auto-flow: row;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 </style>

@@ -14,7 +14,7 @@ function display_episodes(index) {
 
 </script>
 
-<div class="shows" in:fly={{x: -500, duration: 500}} out:fly={{x: -500, duration: 500}}>
+<div class="shows" in:fly={{x: -500, duration: 500}}>
     {#each shows as show, index}
         <img src={show.img} on:click={() => display_episodes(index)}>
     {/each}
@@ -30,8 +30,21 @@ function display_episodes(index) {
     height: auto;
     position: relative;
     z-index: 1;
+    transition: width 0.5s;
     /* border-radius: 5px; */
     /* border-bottom: 1px solid #343648; */
+}
+
+@media (min-width: 700px) {
+    .shows {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1100px) {
+    .shows {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
 }
 
 img {

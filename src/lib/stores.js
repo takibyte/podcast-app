@@ -21,26 +21,6 @@ export let shows = [
             name: "Making Sense with Sam Harris",
             img: "ms.jpeg",
             url: "https://wakingup.libsyn.com/rss"
-        },
-        {
-            name: "The Tim Dillon Show",
-            img: "./tds.jpeg",
-            url: "https://feeds.megaphone.fm/TPC2985326322"
-        },
-        {
-            name: "Darknet Diaries",
-            img: "./dd.jpeg",
-            url: "https://feeds.megaphone.fm/darknetdiaries"
-        },
-        {
-            name: "Lex Fridman Podcast",
-            img: "./lfp.jpeg",
-            url: "https://lexfridman.com/feed/podcast/"
-        },
-        {
-            name: "Making Sense with Sam Harris",
-            img: "ms.jpeg",
-            url: "https://wakingup.libsyn.com/rss"
         }
 ]
 
