@@ -1,5 +1,5 @@
 <script>
-import { display_visible, home_visible, episodes_visible, shows, url_index } from './lib/stores.js';
+import { display_visible, home_visible, episodes_visible, url_index } from './lib/stores.js';
 import Episodes from './lib/Episodes.svelte';
 import Tabs from './lib/Tabs.svelte';
 import Display from './lib/Display.svelte';

@@ -1,5 +1,5 @@
 <script>
-import { shows, url_index, display_visible, home_visible, episodes_visible } from './stores';
+import { shows, url_index, home_visible, episodes_visible } from './stores';
 import { fade, fly } from 'svelte/transition';
 
 function toggle_visible() {
