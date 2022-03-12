@@ -7,13 +7,13 @@ import Home from './lib/Home.svelte';
 import { promises, get_rss } from './lib/rss-parse.js';
 import { fade, fly } from 'svelte/transition';
 
+
 get_rss();
 
 // console.log(promises, null, 3);
 
 </script>
 
-<span class="header">podapp</span>
 
 {#if $home_visible}
     <Home/>
@@ -48,20 +48,6 @@ get_rss();
 
 
 <style>
-.header {
-    display: grid;
-    font-weight: 300;
-    font-size: 1.5rem;
-    text-align: center;
-    height: 50px;
-    line-height: 45px;
-    width: 100%;
-    background-color: #1e1f29;
-    position: sticky;
-    top: 0;
-    z-index: 2;
-}
-
 .top_grid {
     display: grid;
     width: auto;

@@ -2,6 +2,13 @@
 import { shows, url_index, home_visible, episodes_visible } from './stores';
 import { fade, fly } from 'svelte/transition';
 
+let new_rss = '';
+let input_visible = false;
+
+// function add_podcast() {
+//     shows = [...shows, {name: }
+// }
+
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
     $home_visible = !home_visible;
@@ -12,12 +19,29 @@ function display_episodes(index) {
     toggle_visible();
 }
 
-</script>
+function toggle_input() {
+    input_visible = !input_visible;
+}
 
-<div class="shows" in:fly={{x: -500, duration: 500}}>
-    {#each shows as show, index}
-        <img src={show.img} on:click={() => display_episodes(index)}>
-    {/each}
+</script>
+<div in:fly={{x: -500, duration: 500}}>
+    <div class="heading">
+        <div>
+            <span style="float: left; padding-left: 10px;">podcasts</span>
+            <span style="float: right; padding-right: 10px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>
+        </div>
+        {#if input_visible}
+            <input type="text" placeholder="Add rss link" 
+            in:fly={{y: -50, duration: 300}}
+            out:fly={{y: -50, duration: 200}}>
+        {/if}
+    </div>
+
+    <div class="shows">
+        {#each shows as show, index}
+            <img src={show.img} on:click={() => display_episodes(index)}>
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -47,12 +71,35 @@ function display_episodes(index) {
     }
 }
 
+.heading {
+    display: grid;
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+    min-height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background-color: #1e1f29;
+    position: relative;
+    top: 0;
+    z-index: 2;
+}
+
+input {
+    padding: 10px;
+    font-size: 1rem;
+}
+
 img {
     max-width: 100%;
 }
 
 img:hover {
     opacity: 0.8;
+    cursor: pointer;
+}
+
+span {
     cursor: pointer;
 }
 </style>
