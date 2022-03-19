@@ -27,6 +27,7 @@ get_rss();
 <div class="top_grid">
     {#if $episodes_visible}
         <div class="ep_grid" in:fly={{x: 500, duration: 500}} out:fly={{x: 500, duration: 500}}>
+            <div class="heading"><span style="float: left; padding-left: 10px;">episodes</span></div>
             {#await promises[$url_index]}
             <span>loading...</span>
             {:then rss}
@@ -52,7 +53,7 @@ get_rss();
     display: grid;
     width: auto;
     height: auto;
-    min-height: 100vh;
+    height: 100%;
     grid-auto-flow: row;
     background-color: #000;
 }
@@ -64,5 +65,18 @@ get_rss();
     grid-auto-flow: row;
     position: relative;
     z-index: 1;
+}
+
+.heading {
+    display: grid;
+    font-weight: 300;
+    font-size: 1.5rem;
+    min-height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background-color: #1e1f29;
+    position: relative;
+    top: 0;
+    z-index: 2;
 }
 </style>

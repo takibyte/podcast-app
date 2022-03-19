@@ -46,7 +46,7 @@ function toggle_display() {
     width: 100%;
     text-align: center;
     line-height: 42px;
-    position: sticky;
+    position: fixed;
     bottom: 0;
     z-index: 2;
 }
