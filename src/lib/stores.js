@@ -20,7 +20,7 @@ export let shows = [
     {
         name: "Making Sense with Sam Harris",
         img: "ms.jpeg",
-        url: "https://feeds.megaphone.fm/darknetdiaries"
+        url: "https://wakingup.libsyn.com/rss"
     },
     {
         name: "This Past Weekend",
@@ -44,6 +44,7 @@ export let display_visible = writable(false);
 export let episodes_visible = writable(false);
 export let icon = writable("");
 export let name = writable("");
+export let date = writable("");
 export let episode = writable("");
 export let description = writable("");
 export let mp3_url = writable("");

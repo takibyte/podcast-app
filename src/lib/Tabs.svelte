@@ -37,6 +37,8 @@ function toggle_display() {
     <span class="btn">⚃</span>
 </div>
 
+<div class="under-tab"></div>
+
 <style>
 .tabs {
     display: grid;
@@ -49,6 +51,16 @@ function toggle_display() {
     position: fixed;
     bottom: 0;
     z-index: 2;
+}
+
+.under-tab {
+    background-color: #000;
+    opacity: 0;
+    height: 50px;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    z-index: 0;
 }
 
 .btn {

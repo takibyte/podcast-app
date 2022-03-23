@@ -47,7 +47,6 @@ function toggle_input() {
 <style>
 .shows {
     display: grid;
-    grid-area: "img text";
     grid-template-columns: 1fr 1fr 1fr;
     background-color: #000;
     width: 100%;
@@ -55,8 +54,6 @@ function toggle_input() {
     position: relative;
     z-index: 1;
     transition: width 0.5s;
-    /* border-radius: 5px; */
-    /* border-bottom: 1px solid #343648; */
 }
 
 @media (min-width: 700px) {

@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, icon, name, episode, description, mp3_url, home_visible } from './stores.js';
+import { display_visible, episodes_visible, icon, name, date, episode, description, mp3_url, home_visible } from './stores.js';
 import { fly } from 'svelte/transition';
 
 function toggle_display() {
@@ -23,6 +23,7 @@ function toggle_display() {
     </div>
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
+    <span class="date">{$date}</span>
     <span class="name">{$name}</span>
     <div>
         <audio controls>
@@ -89,7 +90,7 @@ h1 {
 }
 
 span {
-    font-size: .8rem;
+    font-size: 1rem;
     padding-bottom: 10px;
 }
 
