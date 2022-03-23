@@ -32,9 +32,9 @@ function toggle_display() {
 
 <div class="tabs">
     <span class="btn" on:click={toggle_home}>⚀</span>
-    <span class="btn" on:click={toggle_episodes}>⚁</span>
-    <span class="btn" on:click={toggle_display}>⚂</span>
-    <span class="btn">⚃</span>
+    <span class="btn" on:click={toggle_display}>⚁</span>
+    <span class="btn" on:click={toggle_episodes}>⚂</span>
+    <!-- <span class="btn">⚃</span> -->
 </div>
 
 <div class="under-tab"></div>
@@ -42,7 +42,7 @@ function toggle_display() {
 <style>
 .tabs {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     background-color: #1e1f29;
     height: 50px;
     width: 100%;
