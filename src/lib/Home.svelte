@@ -37,7 +37,7 @@ function toggle_input() {
         {/if}
     </div>
 
-    <div class="shows">
+    <div class="shows" in:fade={{duration: 800}}>
         {#each shows as show, index}
             <img src={show.img} on:click={() => display_episodes(index)}>
         {/each}

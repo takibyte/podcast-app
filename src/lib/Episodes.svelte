@@ -1,6 +1,7 @@
 <script>
 import { display_visible, episodes_visible, icon, name, date, episode, description, mp3_url, url_index } from './stores.js';
 import { promises, get_rss } from './rss-parse.js';
+import { fade } from 'svelte/transition';
 
 get_rss();
 
@@ -14,7 +15,6 @@ function toggle_visible() {
 }
 
 function display_ep(rss, pod) {
-    console.log(pod);
     $icon =  rss.image;
     $episode = pod.title;
     $date = display_date(pod.created);
@@ -39,7 +39,7 @@ function display_date(pod_created) {
     <span>loading content...</span>
 {:then rss}
     {#each rss.items as pod}
-        <div class="episode" on:click={() => display_ep(rss, pod)}>
+        <div class="episode" on:click={() => display_ep(rss, pod)} in:fade={{duration: 800}}>
             <div class="ep_img"><img src={rss.image}></div>
             <div class="ep_txt">
                 <span>{pod.title}</span>
