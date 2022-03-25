@@ -1,5 +1,7 @@
 <script>
-import { shows, url_index, home_visible, episodes_visible } from './stores';
+import { url_index, home_visible, episodes_visible, rss_list } from './stores';
+import { parse } from 'rss-to-json';
+import { promises, get_rss } from './get-rss.svelte';
 import { fade, fly } from 'svelte/transition';
 
 let new_rss = '';
@@ -8,6 +10,27 @@ let input_visible = false;
 // function add_podcast() {
 //     shows = [...shows, {name: }
 // }
+let show_promise = [];
+let show_img = [];
+
+function get_show() {
+  for (let i = 0; i < $rss_list.length; i++) {
+    show_promise[i] = parse($rss_list[i])
+      .then((rss) => rss);
+  }
+  get_rss();
+  console.log(show_promise)
+}
+get_show();
+
+// (async function() {
+//     for (let index = 0; index < show_promise.length; index++) {
+//         show_img[index] = await show_promise[index].image;     
+//     }
+//     return show_img;
+// })()
+
+console.log(show_promise)
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
@@ -23,6 +46,13 @@ function toggle_input() {
     input_visible = !input_visible;
 }
 
+function add_show() {
+    $rss_list = [...$rss_list, new_rss];
+    new_rss = "";
+    console.log($rss_list)
+    get_show();
+    // console.log(show_promise)
+}
 </script>
 <div in:fly={{x: -500, duration: 500}}>
     <div class="heading">
@@ -33,13 +63,19 @@ function toggle_input() {
         {#if input_visible}
             <input type="text" placeholder="Add rss link" 
             in:fly={{y: -50, duration: 300}}
-            out:fly={{y: -50, duration: 200}}>
+            out:fly={{y: -50, duration: 200}} 
+            bind:value={new_rss}
+            on:keydown="{event => event.key === 'Enter' && add_show()}">
         {/if}
     </div>
 
     <div class="shows" in:fade={{duration: 800}}>
-        {#each shows as show, index}
-            <img src={show.img} on:click={() => display_episodes(index)}>
+        {#each show_promise as promise, index}
+            {#await promise}
+                <!-- <span>loading content...</span> -->
+            {:then show}
+                <img src={show.image} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
+            {/await}
         {/each}
     </div>
 </div>

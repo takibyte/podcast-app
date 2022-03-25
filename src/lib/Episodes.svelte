@@ -1,6 +1,7 @@
 <script>
 import { display_visible, episodes_visible, icon, name, date, episode, description, mp3_url, url_index } from './stores.js';
-import { promises, get_rss } from './rss-parse.js';
+// import { promises, get_rss } from './rss-parse.js';
+import { promises, get_rss } from './get-rss.svelte';
 import { fade } from 'svelte/transition';
 
 get_rss();
