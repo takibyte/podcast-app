@@ -1,34 +1,13 @@
 <script>
 import { url_index, home_visible, episodes_visible, rss_list } from './stores';
 import { parse } from 'rss-to-json';
-import { promises, get_rss } from './get-rss.svelte';
+import { promises, get_rss, show_promise, get_show } from './get-rss.svelte';
 import { fade, fly } from 'svelte/transition';
 
 let new_rss = '';
 let input_visible = false;
 
-// function add_podcast() {
-//     shows = [...shows, {name: }
-// }
-let show_promise = [];
-let show_img = [];
-
-function get_show() {
-  for (let i = 0; i < $rss_list.length; i++) {
-    show_promise[i] = parse($rss_list[i])
-      .then((rss) => rss);
-  }
-  get_rss();
-  console.log(show_promise)
-}
-get_show();
-
-// (async function() {
-//     for (let index = 0; index < show_promise.length; index++) {
-//         show_img[index] = await show_promise[index].image;     
-//     }
-//     return show_img;
-// })()
+// get_show();
 
 console.log(show_promise)
 
@@ -51,7 +30,7 @@ function add_show() {
     new_rss = "";
     console.log($rss_list)
     get_show();
-    // console.log(show_promise)
+    toggle_input();
 }
 </script>
 <div in:fly={{x: -500, duration: 500}}>

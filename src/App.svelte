@@ -5,6 +5,9 @@ import Tabs from './lib/Tabs.svelte';
 import Display from './lib/Display.svelte';
 import Home from './lib/Home.svelte';
 import { fly } from 'svelte/transition';
+import { get_show } from './lib/get-rss.svelte';
+
+get_show();
 
 </script>
 
