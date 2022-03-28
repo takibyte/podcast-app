@@ -1,15 +1,14 @@
 <script>
 import { url_index, home_visible, episodes_visible, rss_list } from './stores';
-import { parse } from 'rss-to-json';
-import { promises, get_rss, show_promise, get_show } from './get-rss.svelte';
+import { promises, get_rss } from './get-rss.svelte';
 import { fade, fly } from 'svelte/transition';
 
 let new_rss = '';
 let input_visible = false;
 
-// get_show();
+get_rss();
 
-console.log(show_promise)
+// console.log(promises);
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
@@ -29,7 +28,7 @@ function add_show() {
     $rss_list = [...$rss_list, new_rss];
     new_rss = "";
     console.log($rss_list)
-    get_show();
+    get_rss();
     toggle_input();
 }
 </script>
@@ -49,7 +48,7 @@ function add_show() {
     </div>
 
     <div class="shows" in:fade={{duration: 800}}>
-        {#each show_promise as promise, index}
+        {#each promises as promise, index}
             {#await promise}
                 <!-- <span>loading content...</span> -->
             {:then show}

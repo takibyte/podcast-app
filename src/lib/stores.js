@@ -52,7 +52,6 @@ export let url_index = writable(0);
 export let rss_list = writable([
     "https://feeds.megaphone.fm/TPC2985326322",
     "https://feeds.megaphone.fm/darknetdiaries",
-    "https://feeds.megaphone.fm/darknetdiaries",
     "https://wakingup.libsyn.com/rss",
     "https://www.omnycontent.com/d/playlist/9b7dacdf-a925-4f95-84dc-ac46003451ff/d32c6294-eba5-4807-abed-acb8002fdc1c/457951e4-f7cd-44ce-a5ff-acb8002fdc26/podcast.rss",
     "https://feeds.simplecast.com/rZ0cYk12",

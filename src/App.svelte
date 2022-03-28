@@ -5,12 +5,9 @@ import Tabs from './lib/Tabs.svelte';
 import Display from './lib/Display.svelte';
 import Home from './lib/Home.svelte';
 import { fly } from 'svelte/transition';
-import { get_show } from './lib/get-rss.svelte';
-
-get_show();
+import { get_rss } from './lib/get-rss.svelte';
 
 </script>
-
 
 {#if $home_visible}
     <Home/>
