@@ -11,7 +11,7 @@ export let episode = writable("");
 export let description = writable("");
 export let mp3_url = writable("");
 export let url_index = writable(0);
-export let rss_list = writable(JSON.parse(localStorage.getItem('store')) ||[
+export let rss_list = writable(JSON.parse(localStorage.getItem('rss_store')) || [
     "https://feeds.megaphone.fm/TPC2985326322",
     "https://feeds.megaphone.fm/darknetdiaries",
     "https://wakingup.libsyn.com/rss",
@@ -20,4 +20,4 @@ export let rss_list = writable(JSON.parse(localStorage.getItem('store')) ||[
     "https://feeds.megaphone.fm/mofi"
 ]);
 
-rss_list.subscribe((value) => localStorage.store = JSON.stringify(value));
+rss_list.subscribe((value) => localStorage.rss_store = JSON.stringify(value));

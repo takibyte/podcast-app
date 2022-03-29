@@ -25,6 +25,9 @@ function display_episodes(index) {
         console.log(index);
         $rss_list.splice(index, 1);
         $rss_list = $rss_list;
+        get_rss();
+        console.log(promises);
+        console.log($rss_list);
     }
 }
 
