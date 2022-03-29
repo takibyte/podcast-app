@@ -1,30 +1,20 @@
 <script>
-import { display_visible, episodes_visible, home_visible, icon } from './stores.js';
+import { display_visible, episodes_visible, home_visible } from './stores.js';
 
 function toggle_home() {
-    if ($episodes_visible) {
-        $episodes_visible = !$episodes_visible;
-        $home_visible = !$home_visible;
-    }
+    $home_visible = true;
+    $episodes_visible = false;
+    $display_visible = false;
 }
 
 function toggle_episodes() {
-    if ($home_visible) {
-        $home_visible = !$home_visible;
-        $episodes_visible = !$episodes_visible;
-    } else if ($display_visible) {
-        $episodes_visible = !$episodes_visible;
-        $display_visible = !$display_visible;
-    }
+    $home_visible = false;
+    $episodes_visible = true;
+    $display_visible = false;
 }
 
 function toggle_display() {
-    if ($episodes_visible) {
-        $episodes_visible = !$episodes_visible;
         $display_visible = !$display_visible;
-    } else {
-        $display_visible = !$display_visible;
-    }
 }
 
 </script>
@@ -34,7 +24,6 @@ function toggle_display() {
     <img src="./home.png" class="btn" on:click={toggle_home} />
     <img src="./display.png" class="btn" on:click={toggle_display} />
     <img src="./episodes.png" class="btn" on:click={toggle_episodes} />
-    <!-- <span class="btn">⚃</span> -->
 </div>
 
 <div class="under-tab"></div>
@@ -47,10 +36,9 @@ function toggle_display() {
     height: 50px;
     width: 100%;
     text-align: center;
-    /* line-height: 42px; */
     position: fixed;
     bottom: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 .under-tab {

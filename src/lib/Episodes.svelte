@@ -9,11 +9,6 @@ let days = [
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 ]
 
-function toggle_visible() {
-    $display_visible = !$display_visible;
-    $episodes_visible = !$episodes_visible;
-}
-
 function display_ep(rss, pod) {
     $icon =  rss.image;
     $episode = pod.title;
@@ -23,7 +18,8 @@ function display_ep(rss, pod) {
     pod.enclosures.forEach(enclosure => {
         $mp3_url = enclosure.url;
     });
-    toggle_visible();
+
+    $display_visible = true;
 }
 
 function display_date(pod_created) {

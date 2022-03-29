@@ -1,25 +1,17 @@
 <script>
-import { display_visible, episodes_visible, icon, name, date, episode, description, mp3_url, home_visible } from './stores.js';
+import { icon, name, date, episode, description, mp3_url } from './stores.js';
 import { fly } from 'svelte/transition';
-
-function toggle_display() {
-    if ($display_visible && !$home_visible) {
-        $episodes_visible = !$episodes_visible;
-        $display_visible = !$display_visible;
-    } else {
-        $display_visible = !$display_visible;
-    }
-}
 
 </script>
 
 
 <div class="overlay"
     in:fly="{{ y: 600, duration: 500 }}"
-    out:fly="{{ y: 600, duration: 500 }}">
+    out:fly="{{ y: 600, duration: 500 }}"
+    autofocus>
 
     <div class="top">
-        <span class="close" on:click={toggle_display}>⌄</span>
+        <!-- <span class="close" on:click={toggle_display}>⌄</span> -->
     </div>
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
@@ -35,7 +27,9 @@ function toggle_display() {
 
     <div class="description" contenteditable="false" 
     bind:innerHTML={$description}></div>
-    
+
+    <br><br><br>  
+
 </div>
 
 <style>
@@ -53,6 +47,10 @@ function toggle_display() {
     overflow-y: scroll;
 }
 
+/* .overlay::-webkit-scrollbar {
+  display: none;
+} */
+
 .description {
     font-size: .9rem;
     text-align: left;
@@ -69,6 +67,7 @@ img {
     max-width: 500px;
     border-radius: 15px;
     padding: 5px;
+    margin-top: 16px;
 }
 
 .play {

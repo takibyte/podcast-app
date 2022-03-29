@@ -35,4 +35,5 @@ import { get_rss } from './lib/get-rss.svelte';
     position: relative;
     z-index: 1;
 }
+
 </style>

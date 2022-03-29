@@ -18,8 +18,14 @@ function toggle_visible() {
 }
 
 function display_episodes(index) {
-    $url_index = index;
-    toggle_visible();
+    if (input_visible === false) {
+        $url_index = index;
+        toggle_visible();
+    } else {
+        console.log(index);
+        $rss_list.splice(index, 1);
+        $rss_list = $rss_list;
+    }
 }
 
 function toggle_input() {
@@ -36,7 +42,9 @@ function add_show() {
     get_rss();
     toggle_input();
 }
+
 </script>
+
 <div in:fly={{x: -500, duration: 500}}>
     <div class="heading">
         <div>
