@@ -6,6 +6,8 @@ import { fade, fly } from 'svelte/transition';
 let new_rss = '';
 let input_visible = false;
 
+let shows_visible = true;
+
 get_rss();
 
 // console.log(promises);
@@ -22,6 +24,9 @@ function display_episodes(index) {
 
 function toggle_input() {
     input_visible = !input_visible;
+    if (!shows_visible) {
+        shows_visible = !shows_visible;
+    }
 }
 
 function add_show() {
@@ -39,23 +44,26 @@ function add_show() {
             <span style="float: right; padding-right: 10px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>
         </div>
         {#if input_visible}
-            <input type="text" placeholder="Add rss link" 
-            in:fly={{y: -50, duration: 300}}
-            out:fly={{y: -50, duration: 200}} 
-            bind:value={new_rss}
-            on:keydown="{event => event.key === 'Enter' && add_show()}">
+           
+                <input type="text" placeholder="Search or paste rss link" bind:value={new_rss}
+                in:fly={{y: -50, duration: 300}}
+                on:keydown={event => event.key === 'Enter' && add_show()}
+                on:click={() => {shows_visible = !shows_visible}}>
+           
         {/if}
     </div>
 
-    <div class="shows" in:fade={{duration: 800}}>
-        {#each promises as promise, index}
-            {#await promise}
-                <!-- <span>loading content...</span> -->
-            {:then show}
-                <img src={show.image} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
-            {/await}
-        {/each}
-    </div>
+    {#if shows_visible}
+        <div class="shows" in:fade={{duration: 800}}>
+            {#each promises as promise, index}
+                {#await promise}
+                    <!-- <span>loading content...</span> -->
+                {:then show}
+                    <img src={show.image} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
+                {/await}
+            {/each}
+        </div>
+    {/if}
 </div>
 
 <style>
@@ -96,9 +104,14 @@ function add_show() {
     z-index: 2;
 }
 
+.add-div {
+    width: 100%;
+}
+
 input {
     padding: 10px;
     font-size: 1rem;
+    /* width: 100%; */
 }
 
 img {

@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, home_visible } from './stores.js';
+import { display_visible, episodes_visible, home_visible, icon } from './stores.js';
 
 function toggle_home() {
     if ($episodes_visible) {
@@ -31,9 +31,9 @@ function toggle_display() {
 
 
 <div class="tabs">
-    <span class="btn" on:click={toggle_home}>⚀</span>
-    <span class="btn" on:click={toggle_display}>⚁</span>
-    <span class="btn" on:click={toggle_episodes}>⚂</span>
+    <img src="./home.png" class="btn" on:click={toggle_home} />
+    <img src="./display.png" class="btn" on:click={toggle_display} />
+    <img src="./episodes.png" class="btn" on:click={toggle_episodes} />
     <!-- <span class="btn">⚃</span> -->
 </div>
 
@@ -47,7 +47,7 @@ function toggle_display() {
     height: 50px;
     width: 100%;
     text-align: center;
-    line-height: 42px;
+    /* line-height: 42px; */
     position: fixed;
     bottom: 0;
     z-index: 2;
@@ -65,10 +65,15 @@ function toggle_display() {
 
 .btn {
     font-size: 2.5rem;
+    margin: auto;
 }
 
 .btn:hover {
     opacity: 0.8;
     cursor: pointer;
+}
+
+img {
+    max-width: 25px;
 }
 </style>
