@@ -5,18 +5,25 @@ function toggle_home() {
     $home_visible = true;
     $episodes_visible = false;
     $display_visible = false;
+    window.document.body.classList.toggle('no-scroll', $display_visible);
 }
 
 function toggle_episodes() {
     $home_visible = false;
     $episodes_visible = true;
     $display_visible = false;
+    window.document.body.classList.toggle('no-scroll', $display_visible);
 }
 
 function toggle_display() {
         $display_visible = !$display_visible;
+        window.document.body.classList.toggle('no-scroll');
 }
 
+
+// $: if ($display_visible) {
+//     window.document.body.classList.toggle('no-scroll');
+// }
 </script>
 
 
@@ -63,5 +70,9 @@ function toggle_display() {
 
 img {
     max-width: 25px;
+}
+
+:global(body.no-scroll) {
+    overflow-y: hidden;
 }
 </style>

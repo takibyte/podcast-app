@@ -26,6 +26,7 @@ function display_episodes(index) {
         $rss_list.splice(index, 1);
         $rss_list = $rss_list;
         get_rss();
+
         console.log(promises);
         console.log($rss_list);
     }
@@ -38,12 +39,32 @@ function toggle_input() {
     }
 }
 
-function add_show() {
-    $rss_list = [...$rss_list, new_rss];
-    new_rss = "";
-    console.log($rss_list)
-    get_rss();
-    toggle_input();
+function validate_url(string) {
+  let url;
+
+  try {
+    url = new URL(string);
+  } catch (_) {
+    return false;  
+  }
+
+  return url.protocol === "http:" || url.protocol === "https:";
+}
+
+function new_show(val) {
+    if (validate_url(val)) {
+        $rss_list = [...$rss_list, new_rss];
+        new_rss = "";
+        console.log($rss_list)
+        get_rss();
+        toggle_input();
+        console.log('valid url');
+    } else {
+        console.log('not valid');
+        // let res = fetch(`https://itunes.apple.com/search?term=${val}&entity=podcast`);
+        // console.log(res);
+    }
+    
 }
 
 </script>
@@ -58,7 +79,7 @@ function add_show() {
            
                 <input type="text" placeholder="Search or paste rss link" bind:value={new_rss}
                 in:fly={{y: -50, duration: 300}}
-                on:keydown={event => event.key === 'Enter' && add_show()}
+                on:keydown={event => event.key === 'Enter' && new_show(new_rss)}
                 on:click={() => {shows_visible = !shows_visible}}>
            
         {/if}

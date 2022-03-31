@@ -9,21 +9,23 @@ import { get_rss } from './lib/get-rss.svelte';
 
 </script>
 
-{#if $home_visible}
-    <Home/>
-{/if}
+<body>
+    {#if $home_visible}
+        <Home/>
+    {/if}
 
-{#if $display_visible}
-    <Display/>
-{/if}
+    {#if $display_visible}
+        <Display/>
+    {/if}
 
-{#if $episodes_visible}
-    <div class="ep_grid" in:fly={{x: 500, duration: 500}}>
-        <Episodes />
-    </div>
-{/if}
+    {#if $episodes_visible}
+        <div class="ep_grid" in:fly={{x: 500, duration: 500}}>
+            <Episodes />
+        </div>
+    {/if}
 
-<Tabs/>
+    <Tabs/>
+</body>
 
 
 <style>
@@ -35,5 +37,4 @@ import { get_rss } from './lib/get-rss.svelte';
     position: relative;
     z-index: 1;
 }
-
 </style>

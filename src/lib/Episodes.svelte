@@ -20,6 +20,7 @@ function display_ep(rss, pod) {
     });
 
     $display_visible = true;
+    window.document.body.classList.toggle('no-scroll');
 }
 
 function display_date(pod_created) {
