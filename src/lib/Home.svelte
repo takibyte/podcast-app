@@ -73,7 +73,9 @@ function new_show(val) {
     <div class="heading">
         <div>
             <span style="float: left; padding-left: 10px;">podcasts</span>
-            <span style="float: right; padding-right: 10px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>
+            <span class="option">⋯</span>
+            <span class="option" style="padding-right: 20px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>
+            
         </div>
         {#if input_visible}
            
@@ -120,6 +122,13 @@ function new_show(val) {
     .shows {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     }
+}
+
+.option {
+    float: right; 
+    padding-right: 15px;
+    font-size: 2.5rem;
+    /* font-family: Helvetica; */
 }
 
 .heading {

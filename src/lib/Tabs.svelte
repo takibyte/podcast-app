@@ -18,6 +18,7 @@ function toggle_episodes() {
 function toggle_display() {
         $display_visible = !$display_visible;
         window.document.body.classList.toggle('no-scroll');
+        // window.document.querySelectorAll('.overlay').width
 }
 
 

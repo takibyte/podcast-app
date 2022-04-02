@@ -30,7 +30,12 @@ function display_date(pod_created) {
 }
 </script>
 
-<div class="heading"><div class="header">episodes</div></div>
+<div class="heading">
+    <div>
+        <span class="header">episodes</span>
+        <span class="option">⋯</span>
+    </div>
+</div>
 
 {#await promises[$url_index]}
     <span>loading content...</span>
@@ -39,9 +44,9 @@ function display_date(pod_created) {
         <div class="episode" on:click={() => display_ep(rss, pod)} in:fade={{duration: 800}}>
             <div class="ep_img"><img src={rss.image}></div>
             <div class="ep_txt">
-                <span>{pod.title}</span>
-                <span class="date">{display_date(pod.created)}</span>
-                <span class="name">{rss.title}</span>
+                <span class="ep-span">{pod.title}</span>
+                <span class="date ep-span">{display_date(pod.created)}</span>
+                <span class="name ep-span">{rss.title}</span>
             </div>
         </div>
     {/each}
@@ -64,6 +69,13 @@ function display_date(pod_created) {
 .header {
     float: left; 
     padding-left: 10px;
+}
+
+.option {
+    float: right; 
+    padding-right: 15px;
+    font-size: 2.5rem;
+    /* font-family: Helvetica; */
 }
 
 .episode {
@@ -95,7 +107,7 @@ img {
     padding: 5px;
 }
 
-span {
+.ep-span {
     font-size: 1.1rem;
     width: 100%;
     text-overflow: ellipsis;
