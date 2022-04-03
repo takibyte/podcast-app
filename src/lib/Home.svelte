@@ -88,6 +88,7 @@ function new_show(val) {
     </div>
 
     {#if shows_visible}
+        {#key $rss_list}
         <div class="shows" in:fade={{duration: 800}}>
             {#each promises as promise, index}
                 {#await promise}
@@ -97,6 +98,7 @@ function new_show(val) {
                 {/await}
             {/each}
         </div>
+        {/key}
     {/if}
 </div>
 
