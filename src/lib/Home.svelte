@@ -12,7 +12,6 @@ let search;
 
 get_rss();
 
-// console.log(promises);
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
