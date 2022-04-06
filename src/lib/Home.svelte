@@ -67,7 +67,8 @@ function new_show(val) {
         console.log('valid url');
     } else {
         search = [];
-        search = fetch(`https://itunes.apple.com/search?term=${val}&entity=podcast`)
+
+        search = fetch(`.netlify/functions/search?val=${val}`)
             .then(response => response.json())
             .then(data => data);
         
@@ -132,6 +133,7 @@ function add_show(search_rss) {
                         </div>
                     </div>
                 {/each}  
+                <!-- <span>{results}</span> -->
             {/await}  
         </div>
     {/if}

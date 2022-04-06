@@ -1,6 +1,5 @@
 /* eslint-disable*/
 import { writable } from 'svelte/store';
-
 export let home_visible = writable(true);
 export let display_visible = writable(false);
 export let episodes_visible = writable(false);
