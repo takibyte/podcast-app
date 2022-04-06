@@ -68,7 +68,10 @@ function new_show(val) {
     } else {
         search = [];
 
-        search = fetch(`.netlify/functions/search?val=${val}`)
+        search = fetch(`/.netlify/functions/search`, {
+            method: 'POST',
+            body: JSON.stringify({data: val})
+        })
             .then(response => response.json())
             .then(data => data);
         
@@ -124,7 +127,7 @@ function add_show(search_rss) {
             {#await search}
             <span>searching...</span>
             {:then results}
-                {#each results.data.results as result}
+                {#each results.results as result}
                     <div class="search_result">
                         <div><img class="search_img" src={result.artworkUrl600}></div>
                         <div class="search_txt">
