@@ -12,6 +12,7 @@ let search;
 
 get_rss();
 
+console.log(promises);
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
@@ -42,6 +43,7 @@ function toggle_input() {
 
     if (search_visible) {
         search_visible = false;
+        new_rss = '';
     }
 }
 
@@ -57,6 +59,8 @@ function validate_url(string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
+
+// checks if input is an rss url or search query
 function new_show(val) {
     if (validate_url(val)) {
         $rss_list = [...$rss_list, new_rss];
@@ -81,6 +85,7 @@ function new_show(val) {
     }
 }
 
+//adds from search view
 function add_show(search_rss) {
     $rss_list = [...$rss_list, search_rss];
     get_rss();
