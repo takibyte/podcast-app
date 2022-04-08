@@ -118,7 +118,7 @@ function add_show(search_rss) {
         <div class="shows" in:fade={{duration: 800}}>
             {#each promises as promise, index}
                 {#await promise}
-                    <!-- <span>loading content...</span> -->
+                    <div style:width="100%"></div>
                 {:then show}
                     <img src={show.image} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
                 {/await}

@@ -55,7 +55,7 @@ import { fly } from 'svelte/transition';
     font-size: .9rem;
     text-align: left;
     width: 90vw;
-    max-width: 500px;
+    max-width: 450px;
     line-height: 1.5rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -64,7 +64,7 @@ import { fly } from 'svelte/transition';
 
 img {
     width: 90vw;
-    max-width: 500px;
+    max-width: 450px;
     border-radius: 15px;
     padding: 5px;
     margin-top: 16px;
@@ -114,7 +114,7 @@ span {
 
 audio {
     width: 90vw;
-    max-width: 500px;
+    max-width: 450px;
 }
 
 </style>

@@ -38,7 +38,7 @@ function display_date(pod_created) {
 </div>
 
 {#await promises[$url_index]}
-    <span>loading content...</span>
+    <span>loading episodes...</span>
 {:then rss}
     {#each rss.items as pod}
         <div class="episode" on:click={() => display_ep(rss, pod)} in:fade={{duration: 800}}>
