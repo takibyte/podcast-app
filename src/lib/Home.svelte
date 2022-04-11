@@ -9,10 +9,9 @@ let input_visible = false;
 let shows_visible = true;
 let search_visible = false;
 let search;
+let promise_array;
 
-get_rss();
-
-console.log(promises);
+get_rss();  // inititalises shows by getting promises from rss_list
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
@@ -21,17 +20,14 @@ function toggle_visible() {
 
 function display_episodes(index) {
     if (input_visible === false) {
-        $url_index = index;
+        $url_index = index; // feeds through corresponding array index to load matching rss feed
         toggle_visible();
     } else {
-        console.log(index);
+        // when the input is visible, affords removing a show via clicking
         $rss_list.splice(index, 1);
         $rss_list = $rss_list;
         input_visible = !input_visible;
         get_rss();
-
-        console.log(promises);
-        console.log($rss_list);
     }
 }
 
@@ -55,7 +51,6 @@ function validate_url(string) {
   } catch (_) {
     return false;  
   }
-
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
@@ -65,14 +60,12 @@ function new_show(val) {
     if (validate_url(val)) {
         $rss_list = [...$rss_list, new_rss];
         new_rss = "";
-        console.log($rss_list);
         get_rss();
         toggle_input();
-        console.log('valid url');
     } else {
         search = [];
 
-        search = fetch(`/.netlify/functions/search`, {
+        search = fetch('/.netlify/functions/search', {
             method: 'POST',
             body: JSON.stringify({data: val})
         })
@@ -80,8 +73,6 @@ function new_show(val) {
             .then(data => data);
         
         search_visible = true;
-
-        console.log(search);
     }
 }
 
@@ -93,6 +84,21 @@ function add_show(search_rss) {
     console.log($rss_list);
 }
 
+// collect all promises and store each image + rss in a  local object
+// for faster loading of shows
+async function show_promises() {
+    promise_array = Promise.all(promises)
+        .then((promise_array) => promise_array);
+
+        // copy show rss and img src from promise array to rss_list
+        // should try to avoid proceessing every show feed  and  image on eveery load of home
+        // just after adding a new show and displaying episodes, maybee on first load
+    
+}
+
+show_promises();
+console.log(promise_array)
+console.log($rss_list[0].rss)
 </script>
 
 <div in:fly={{x: -500, duration: 500}}>
@@ -100,16 +106,14 @@ function add_show(search_rss) {
         <div>
             <span style="float: left; padding-left: 10px;">podcasts</span>
             <span class="option">⋯</span>
-            <span class="option" style="padding-right: 20px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>
-            
+            <span class="option" style="padding-right: 20px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>      
         </div>
-        {#if input_visible}
-           
-                <input type="text" placeholder="Search or paste rss link" bind:value={new_rss}
-                in:fly={{y: -50, duration: 300}}
-                on:keydown={event => event.key === 'Enter' && new_show(new_rss)}
-                on:click={() => {shows_visible = false}}>
-           
+
+        {#if input_visible}          
+            <input type="text" placeholder="Search or paste rss link" bind:value={new_rss}
+            in:fly={{y: -50, duration: 300}}
+            on:keydown={event => event.key === 'Enter' && new_show(new_rss)}
+            on:click={() => {shows_visible = false}}> 
         {/if}
     </div>
 

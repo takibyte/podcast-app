@@ -11,7 +11,7 @@ export function get_rss() {
   promises = [];
 
   for (let i = 0; i < get(rss_list).length; i++) {
-    promises[i] = parse(get(rss_list)[i])
+    promises[i] = parse(get(rss_list)[i].rss) 
       .then((rss) => rss)
       .catch((err) => err);
   }
