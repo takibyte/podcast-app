@@ -11,7 +11,7 @@ let search_visible = false;
 let search;
 let promise_array;
 
-get_rss();  // inititalises shows by getting promises from rss_list
+// get_rss();  // inititalises shows by getting promises from rss_list
 
 function toggle_visible() {
     $episodes_visible = !$episodes_visible;
@@ -27,7 +27,6 @@ function display_episodes(index) {
         $rss_list.splice(index, 1);
         $rss_list = $rss_list;
         input_visible = !input_visible;
-        get_rss();
     }
 }
 
@@ -58,9 +57,10 @@ function validate_url(string) {
 // checks if input is an rss url or search query
 function new_show(val) {
     if (validate_url(val)) {
-        $rss_list = [...$rss_list, new_rss];
+        $rss_list = [...$rss_list, {rss: new_rss, img: ''}];
         new_rss = "";
         get_rss();
+        get_promises();
         toggle_input();
     } else {
         search = [];
@@ -78,27 +78,27 @@ function new_show(val) {
 
 //adds from search view
 function add_show(search_rss) {
-    $rss_list = [...$rss_list, search_rss];
+    $rss_list = [...$rss_list, {rss: search_rss, img: ''}];
     get_rss();
+    get_promises();
     toggle_input();
+}
+
+// collect all promises and store each image in a local object
+// for faster loading of shows
+async function get_promises() {
+    promise_array = await Promise.all(promises)
+        .then((promise_array) => update_list(promise_array));
+}
+
+function update_list(prom) {
+    for (let i = 0; i < prom.length; i++) {
+        $rss_list[i].img = prom[i].image;
+    }
+    console.log(prom);
     console.log($rss_list);
 }
 
-// collect all promises and store each image + rss in a  local object
-// for faster loading of shows
-async function show_promises() {
-    promise_array = Promise.all(promises)
-        .then((promise_array) => promise_array);
-
-        // copy show rss and img src from promise array to rss_list
-        // should try to avoid proceessing every show feed  and  image on eveery load of home
-        // just after adding a new show and displaying episodes, maybee on first load
-    
-}
-
-show_promises();
-console.log(promise_array)
-console.log($rss_list[0].rss)
 </script>
 
 <div in:fly={{x: -500, duration: 500}}>
@@ -120,12 +120,8 @@ console.log($rss_list[0].rss)
     {#if shows_visible}
         {#key $rss_list}
         <div class="shows" in:fade={{duration: 800}}>
-            {#each promises as promise, index}
-                {#await promise}
-                    <div style:width="100%"></div>
-                {:then show}
-                    <img src={show.image} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
-                {/await}
+            {#each $rss_list as list, index}
+                    <img src={list.img} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
             {/each}
         </div>
         {/key}
@@ -141,11 +137,10 @@ console.log($rss_list[0].rss)
                         <div><img class="search_img" src={result.artworkUrl600}></div>
                         <div class="search_txt">
                             <span class="ep_span">{result.trackName}</span>
-                            <span on:click={() => add_show(result.feedUrl)}>＋</span>
                         </div>
+                        <div class="add_show" on:click={() => add_show(result.feedUrl)}>＋</div>
                     </div>
                 {/each}  
-                <!-- <span>{results}</span> -->
             {/await}  
         </div>
     {/if}
@@ -184,8 +179,8 @@ console.log($rss_list[0].rss)
 
 .search_result {
     display: grid;
-    grid-area: "img text";
-    grid-template-columns: 70px auto;
+    grid-area: "img text button";
+    grid-template-columns: 70px auto 50px;
     background-color: #000;
     width: 100%;
     height: 75px;
@@ -206,11 +201,36 @@ console.log($rss_list[0].rss)
     padding-bottom: 2px;
 }
 
+/* .ep_span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+} */
+
 .option {
     float: right; 
     padding-right: 15px;
     font-size: 2.5rem;
     /* font-family: Helvetica; */
+}
+
+.add_show {
+    background-color: #fff;
+    color: #000;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    /* padding: 5px; */
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    /* position: sticky; */
+    margin: auto;
+    font-size: 1.5rem;
+}
+
+.add_show:hover {
+    opacity: 0.8;
 }
 
 .heading {

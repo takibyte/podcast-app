@@ -5,13 +5,13 @@ import { rss_list } from './stores.js';
 
 export let promises;
 
-console.log(get(rss_list));
-
 export function get_rss() {
   promises = [];
 
+  let rss = get(rss_list);
+
   for (let i = 0; i < get(rss_list).length; i++) {
-    promises[i] = parse(get(rss_list)[i].rss) 
+    promises[i] = parse(rss[i].rss) 
       .then((rss) => rss)
       .catch((err) => err);
   }

@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, home_visible } from './stores.js';
+import { display_visible, episodes_visible, home_visible, rss_list } from './stores.js';
 
 function toggle_home() {
     $home_visible = true;
@@ -9,9 +9,11 @@ function toggle_home() {
 }
 
 function toggle_episodes() {
-    $home_visible = false;
-    $episodes_visible = true;
-    $display_visible = false;
+    if ($rss_list.length > 0) {
+        $home_visible = false;
+        $episodes_visible = true;
+        $display_visible = false;
+    }
     window.document.body.classList.toggle('no-scroll', $display_visible);
 }
 
