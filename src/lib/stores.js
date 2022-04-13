@@ -2,6 +2,7 @@
 import { writable } from 'svelte/store';
 export let home_visible = writable(true);
 export let display_visible = writable(false);
+export let display_height = writable('0%');
 export let episodes_visible = writable(false);
 export let icon = writable("");
 export let name = writable("");
@@ -9,6 +10,7 @@ export let date = writable("");
 export let episode = writable("");
 export let description = writable("");
 export let mp3_url = writable("");
+export let player_mp3 = writable("");
 export let url_index = writable(0);
 export let rss_list = writable(JSON.parse(localStorage.getItem('rss_store')) || [
     { rss: "https://feeds.megaphone.fm/TPC2985326322", img: "https://megaphone.imgix.net/podcasts/0b605418-1719-11ec-b9f4-df72a2a81ee0/image/ede37b0b92f5799367ffaaa1f9d4a24fd1587f5037861fba41fdb34c330d98dc2869e629367941d87abacf6e8fbcfe51cd5e2e36f0d90c44b1cdfc1da6ec4059.jpeg?ixlib=rails-2.1.2&amp;max-w=3000&amp;max-h=3000&amp;fit=crop&amp;auto=format,compress"},

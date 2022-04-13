@@ -13,9 +13,9 @@ import { fly } from 'svelte/transition';
         <Home/>
     {/if}
 
-    {#if $display_visible}
+    <!-- {#if $display_visible} -->
         <Display/>
-    {/if}
+    <!-- {/if} -->
 
     {#if $episodes_visible}
         <div class="ep_grid" in:fly={{x: 500, duration: 500}}>

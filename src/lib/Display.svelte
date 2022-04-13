@@ -1,6 +1,16 @@
 <script>
-import { icon, name, date, episode, description, mp3_url } from './stores.js';
+import { icon, name, date, episode, description, mp3_url, player_mp3, display_height } from './stores.js';
 import { fly } from 'svelte/transition';
+
+let player;
+
+function play() {
+    if ($player_mp3 !== $mp3_url) {
+        $player_mp3 = $mp3_url;
+        // toggle pause
+    }
+    player.play();
+}
 
 </script>
 
@@ -8,6 +18,7 @@ import { fly } from 'svelte/transition';
 <div class="overlay"
     in:fly="{{ y: 600, duration: 500 }}"
     out:fly="{{ y: 600, duration: 500 }}"
+    style:height={$display_height}
     autofocus>
 
     <div class="top">
@@ -16,14 +27,18 @@ import { fly } from 'svelte/transition';
     <img src={$icon} alt="">
     <h1>{$episode}</h1>
     <span class="date">{$date}</span>
-    <span class="name">{$name}</span>
-    <div>
-        <audio controls>
-            <source src={$mp3_url} type="audio/mpeg">
-            <track kind="captions" />
+    <!-- <span class="name">{$name}</span> -->
+    <img class="play" src="./play.png" on:click={play}>
+
+    <div class="player">
+        {#key $player_mp3}
+        <audio controls bind:this={player}>
+                <source src={$player_mp3} type="audio/mpeg">
+                <track kind="captions" />
         </audio>
+        {/key}
+        
     </div>
-    <!-- <img class="play" src="./play.png"/> -->
 
     <div class="description" contenteditable="false" 
     bind:innerHTML={$description}></div>
@@ -38,13 +53,20 @@ import { fly } from 'svelte/transition';
     background-color: black;
     position: fixed;
     bottom: 0;
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    transition: height .5s;
+}
+
+.player {
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
 }
 
 /* .overlay::-webkit-scrollbar {
@@ -72,8 +94,7 @@ img {
 
 .play {
     width: 80px;
-    margin: 0;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .play:hover {
@@ -90,11 +111,11 @@ h1 {
 
 span {
     font-size: 1rem;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
 }
 
-.name {
-    padding-bottom: 20px;
+.date {
+    /* padding-bottom: 10px; */
 }
 
 .top {
@@ -113,8 +134,9 @@ span {
 }
 
 audio {
-    width: 90vw;
+    width: 98vw;
     max-width: 450px;
+    height: 40px;
 }
 
 </style>

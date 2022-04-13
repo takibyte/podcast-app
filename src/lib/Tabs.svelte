@@ -1,10 +1,11 @@
 <script>
-import { display_visible, episodes_visible, home_visible, rss_list } from './stores.js';
+import { display_visible, display_height, episodes_visible, home_visible, rss_list } from './stores.js';
 
 function toggle_home() {
     $home_visible = true;
     $episodes_visible = false;
     $display_visible = false;
+    $display_height = '0%'
     window.document.body.classList.toggle('no-scroll', $display_visible);
 }
 
@@ -13,12 +14,18 @@ function toggle_episodes() {
         $home_visible = false;
         $episodes_visible = true;
         $display_visible = false;
+        $display_height = '0%'
     }
     window.document.body.classList.toggle('no-scroll', $display_visible);
 }
 
 function toggle_display() {
         $display_visible = !$display_visible;
+        if ($display_height === '0%') {
+            $display_height = '100%';
+        } else if ($display_height === '100%') {
+            $display_height = '0%'
+        }
         window.document.body.classList.toggle('no-scroll');
         // window.document.querySelectorAll('.overlay').width
 }
@@ -32,7 +39,7 @@ function toggle_display() {
 
 <div class="tabs">
     <img src="./home.png" class="btn" on:click={toggle_home} />
-    <img src="./display.png" class="btn" on:click={toggle_display} />
+    <img src={!$display_visible ? "./display.png" : "./display-down.png"} class="btn" on:click={toggle_display} />
     <img src="./episodes.png" class="btn" on:click={toggle_episodes} />
 </div>
 
