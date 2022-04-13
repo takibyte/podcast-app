@@ -217,9 +217,9 @@ function update_list(prom) {
 .add_show {
     background-color: #fff;
     color: #000;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
+    width: 32.5px;
+    height: 32.5px;
+    line-height: 32.5px;
     /* padding: 5px; */
     border-radius: 8px;
     text-align: center;
