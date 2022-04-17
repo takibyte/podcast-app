@@ -1,5 +1,5 @@
 <script>
-import { icon, player_icon, name, player_name, date, player_date, episode, player_episode, description, player_description, mp3_url, player_mp3, player_height, display_visible, episodes_visible } from './stores.js';
+import { icon, player_icon, name, player_name, date, player_date, episode, player_episode, description, player_description, mp3_url, player_mp3, player_height, display_visible, episodes_visible, player_visible } from './stores.js';
 import { fly } from 'svelte/transition';
 
 let player;
@@ -15,6 +15,7 @@ function play() {
     $player_description = $description;
 
     $player_height = '100%';
+    $player_visible = true;
     $display_visible = false;
     // player.play();
 }
