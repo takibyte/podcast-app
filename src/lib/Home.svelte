@@ -101,7 +101,7 @@ function update_list(prom) {
 
 </script>
 
-<div in:fly={{x: -500, duration: 500}}>
+<div in:fly={{x: 500, duration: 500}}>
     <div class="heading">
         <div>
             <span style="float: left; padding-left: 10px;">podcasts</span>

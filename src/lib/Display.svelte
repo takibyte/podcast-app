@@ -1,5 +1,5 @@
 <script>
-import { icon, name, date, episode, description, mp3_url, player_mp3, display_height } from './stores.js';
+import { icon, player_icon, name, player_name, date, player_date, episode, player_episode, description, player_description, mp3_url, player_mp3, player_height, display_visible, episodes_visible } from './stores.js';
 import { fly } from 'svelte/transition';
 
 let player;
@@ -7,67 +7,63 @@ let player;
 function play() {
     if ($player_mp3 !== $mp3_url) {
         $player_mp3 = $mp3_url;
-        // toggle pause
     }
-    player.play();
+    $player_icon = $icon;
+    $player_name = $name;
+    $player_date = $date;
+    $player_episode = $episode;
+    $player_description = $description;
+
+    $player_height = '100%';
+    $display_visible = false;
+    // player.play();
+}
+
+function back() {
+    $display_visible = false;
+    $episodes_visible = true;
+    
 }
 
 </script>
 
+{#if display_visible}
+    <div class="overlay" in:fly="{{ x: -300, duration: 500 }}" autofocus>
 
-<div class="overlay"
-    in:fly="{{ y: 600, duration: 500 }}"
-    out:fly="{{ y: 600, duration: 500 }}"
-    style:height={$display_height}
-    autofocus>
+        <div class="heading">
+            <div>
+                <span class="header" on:click={back}>﹤</span>
+                <span class="option">⋯</span>
+            </div>
+        </div>
 
-    <div class="top">
-        <!-- <span class="close" on:click={toggle_display}>⌄</span> -->
+        <img src={$icon} alt="">
+        <h1>{$episode}</h1>
+        <span class="date">{$date}</span>
+        <!-- <span class="name">{$name}</span> -->
+        <img class="play" src="./play.png" on:click={play}>
+
+        <div class="description" contenteditable="false" 
+        bind:innerHTML={$description}></div>
+
+        <br><br><br>  
+
     </div>
-    <img src={$icon} alt="">
-    <h1>{$episode}</h1>
-    <span class="date">{$date}</span>
-    <!-- <span class="name">{$name}</span> -->
-    <img class="play" src="./play.png" on:click={play}>
-
-    <div class="player">
-        {#key $player_mp3}
-        <audio controls bind:this={player}>
-                <source src={$player_mp3} type="audio/mpeg">
-                <track kind="captions" />
-        </audio>
-        {/key}
-        
-    </div>
-
-    <div class="description" contenteditable="false" 
-    bind:innerHTML={$description}></div>
-
-    <br><br><br>  
-
-</div>
+{/if}
 
 <style>
 .overlay {
     z-index: 3;
     background-color: black;
-    position: fixed;
-    bottom: 0;
-    /* height: 100%; */
+    height: 100%;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
-    transition: height .5s;
 }
 
-.player {
-    position: fixed;
-    bottom: 50px;
-    width: 100%;
-}
 
 /* .overlay::-webkit-scrollbar {
   display: none;
@@ -81,11 +77,10 @@ function play() {
     line-height: 1.5rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
-    /* hyphens: auto; */
 }
 
 img {
-    width: 90vw;
+    width: 85vw;
     max-width: 450px;
     border-radius: 15px;
     padding: 5px;
@@ -118,9 +113,6 @@ span {
     /* padding-bottom: 10px; */
 }
 
-.top {
-    width: 100vw;
-}
 
 .close {
     font-size: 1.5rem;
@@ -137,6 +129,33 @@ audio {
     width: 98vw;
     max-width: 450px;
     height: 40px;
+}
+
+.heading {
+    display: grid;
+    font-weight: 300;
+    font-size: 1.5rem;
+    min-height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background-color: #1e1f29;
+    position: relative;
+    top: 0;
+    z-index: 2;
+}
+
+.header {
+    float: left; 
+    padding-left: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.option {
+    float: right; 
+    padding-right: 15px;
+    font-size: 2.5rem;
+    /* font-family: Helvetica; */
 }
 
 </style>

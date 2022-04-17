@@ -1,12 +1,13 @@
 <script>
-import { display_visible, display_height, episodes_visible, home_visible, rss_list } from './stores.js';
+import { display_visible, player_visible, player_height, episodes_visible, home_visible, rss_list } from './stores.js';
 
 function toggle_home() {
     $home_visible = true;
     $episodes_visible = false;
     $display_visible = false;
-    $display_height = '0%'
-    window.document.body.classList.toggle('no-scroll', $display_visible);
+    $player_visible = false;
+    $player_height = '0%'
+    window.document.body.classList.toggle('no-scroll', $player_visible);
 }
 
 function toggle_episodes() {
@@ -14,18 +15,24 @@ function toggle_episodes() {
         $home_visible = false;
         $episodes_visible = true;
         $display_visible = false;
-        $display_height = '0%'
+        $player_visible = false;
+        $player_height = '0%'
     }
-    window.document.body.classList.toggle('no-scroll', $display_visible);
+    window.document.body.classList.toggle('no-scroll', $player_visible);
 }
 
-function toggle_display() {
-        $display_visible = !$display_visible;
-        if ($display_height === '0%') {
-            $display_height = '100%';
-        } else if ($display_height === '100%') {
-            $display_height = '0%'
+function toggle_player() {
+        $player_visible = !$player_visible;
+        if ($player_height === '0%') {
+            $player_height = '100%';
+        } else if ($player_height === '100%') {
+            $player_height = '0%'
+            if ($home_visible === false && $episodes_visible === false && $display_visible === false) {
+                $display_visible = true;
+            }
         }
+
+
         window.document.body.classList.toggle('no-scroll');
         // window.document.querySelectorAll('.overlay').width
 }
@@ -39,7 +46,7 @@ function toggle_display() {
 
 <div class="tabs">
     <img src="./home.png" class="btn" on:click={toggle_home} />
-    <img src={!$display_visible ? "./display.png" : "./display-down.png"} class="btn" on:click={toggle_display} />
+    <img src={!$player_visible ? "./display.png" : "./display-down.png"} class="btn" on:click={toggle_player} />
     <img src="./episodes.png" class="btn" on:click={toggle_episodes} />
 </div>
 

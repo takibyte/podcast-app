@@ -1,5 +1,5 @@
 <script>
-import { display_visible, episodes_visible, icon, name, date, episode, description, mp3_url, url_index, display_height } from './stores.js';
+import { display_visible, player_visible, player_height, episodes_visible, icon, name, date, episode, description, mp3_url, url_index } from './stores.js';
 import { promises, get_rss } from './get-rss.svelte';
 import { fade } from 'svelte/transition';
 
@@ -20,8 +20,9 @@ function display_ep(rss, pod) {
     });
 
     $display_visible = true;
-    $display_height = '100%';
-    window.document.body.classList.toggle('no-scroll');
+    $episodes_visible = false;
+    // $display_height = '100%';
+    // window.document.body.classList.toggle('no-scroll');
 }
 
 function display_date(pod_created) {
