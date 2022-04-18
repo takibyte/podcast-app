@@ -201,11 +201,6 @@ function update_list(prom) {
     padding-bottom: 2px;
 }
 
-/* .ep_span {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-} */
 
 .option {
     float: right; 
