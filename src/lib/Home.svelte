@@ -121,7 +121,13 @@ function update_list(prom) {
         {#key $rss_list}
         <div class="shows" in:fade={{duration: 800}}>
             {#each $rss_list as list, index}
-                    <img src={list.img} on:click={() => display_episodes(index)} in:fade={{duration: 400}}>
+                    <div class="show_div">
+                        <img class="show_img" src={list.img} on:click={() => display_episodes(index)} in:fade={{duration: 400}} 
+                        style:opacity={input_visible ? '0.6' : '1'}>
+                        {#if input_visible}
+                            <div class="rm_div" on:click={() => display_episodes(index)}>ⓧ</div>
+                        {/if}
+                    </div>
             {/each}
         </div>
         {/key}
@@ -252,11 +258,31 @@ input {
     /* width: 100%; */
 }
 
-img {
-    max-width: 100%;
+.show_div {
+    position: relative;
+    /* max-width: 100%; */
+    cursor: pointer;
 }
 
-img:hover {
+.show_img {
+    max-width: 100%;
+    display: block;
+}
+
+.rm_div {
+    position: absolute;
+    top: 0;
+    font-size: 2.5rem;
+    opacity: 0.9;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.show_div:hover {
     opacity: 0.8;
     cursor: pointer;
 }
