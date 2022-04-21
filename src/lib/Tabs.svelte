@@ -7,7 +7,7 @@ function toggle_home() {
     $display_visible = false;
     $player_visible = false;
     $player_height = '0%'
-    window.document.body.classList.toggle('no-scroll', $player_visible);
+    // window.document.body.classList.toggle('no-scroll', $player_visible);
 }
 
 function toggle_episodes() {
@@ -18,7 +18,7 @@ function toggle_episodes() {
         $player_visible = false;
         $player_height = '0%'
     }
-    window.document.body.classList.toggle('no-scroll', $player_visible);
+    // window.document.body.classList.toggle('no-scroll', $player_visible);
 }
 
 function toggle_player() {
@@ -33,7 +33,7 @@ function toggle_player() {
         }
 
 
-        window.document.body.classList.toggle('no-scroll');
+        // window.document.body.classList.toggle('no-scroll');
         // window.document.querySelectorAll('.overlay').width
 }
 
@@ -89,7 +89,7 @@ img {
     max-width: 25px;
 }
 
-:global(body.no-scroll) {
+/* :global(body.no-scroll) {
     overflow-y: hidden;
-}
+} */
 </style>
