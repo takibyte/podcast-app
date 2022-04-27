@@ -110,7 +110,7 @@ function update_list(prom) {
         </div>
 
         {#if input_visible}          
-            <input type="text" placeholder="Search or paste rss link" bind:value={new_rss}
+            <input type="text" placeholder="Search podcast, or paste rss link" bind:value={new_rss}
             in:fly={{y: -50, duration: 300}}
             on:keydown={event => event.key === 'Enter' && new_show(new_rss)}
             on:click={() => {shows_visible = false}}> 
