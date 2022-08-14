@@ -71,9 +71,9 @@ function new_show(val) {
             method: 'POST',
             body: JSON.stringify({data: val})
         })
-            .then(response => {return response.json()})
-            .then(data => {return data})
-            .catch(error => {console.error(error)});
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error(error));
 
         search_visible = true;
     }
