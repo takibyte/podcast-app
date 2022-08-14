@@ -11,6 +11,8 @@ let search_visible = false;
 let search;
 let promise_array;
 
+window.scrollTo(0, 0);
+
 // get_rss();  // inititalises shows by getting promises from rss_list
 
 function toggle_visible() {

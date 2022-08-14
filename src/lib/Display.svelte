@@ -4,6 +4,8 @@ import { fly } from 'svelte/transition';
 
 let player;
 
+window.scrollTo(0, 0);
+
 function play() {
     if ($player_mp3 !== $mp3_url) {
         $player_mp3 = $mp3_url;

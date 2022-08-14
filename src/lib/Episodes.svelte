@@ -3,11 +3,13 @@ import { display_visible, player_visible, player_height, episodes_visible, icon,
 import { promises, get_rss } from './get-rss.svelte';
 import { fade } from 'svelte/transition';
 
-get_rss();
-
 let days = [
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 ]
+
+get_rss();
+
+window.scrollTo(0, 0);
 
 function display_ep(rss, pod) {
     $icon =  $rss_list[$url_index].img;
