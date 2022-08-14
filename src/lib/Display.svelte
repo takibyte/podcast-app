@@ -33,8 +33,8 @@ function back() {
 
         <div class="heading">
             <div>
-                <span class="header" on:click={back}>﹤</span>
-                <span class="option">⋯</span>
+                <span class="header" on:click={back}>↩</span>
+                <!-- <span class="option">⋯</span> -->
             </div>
         </div>
 
@@ -137,7 +137,7 @@ audio {
     font-weight: 300;
     font-size: 1.5rem;
     min-height: 50px;
-    line-height: 50px;
+    line-height: 48px;
     width: 100%;
     background-color: #1e1f29;
     position: relative;
@@ -148,7 +148,7 @@ audio {
 .header {
     float: left; 
     padding-left: 10px;
-    font-size: 1.5rem;
+    font-size: 2rem;
     cursor: pointer;
 }
 

@@ -59,8 +59,8 @@ function new_show(val) {
     if (validate_url(val)) {
         $rss_list = [...$rss_list, {rss: new_rss, img: ''}];
         new_rss = "";
-        get_rss();
-        get_promises();
+        get_rss(); // for adding artwork from rss feed
+        get_promises(); // for adding artwork from rss feed
         toggle_input();
     } else {
         search = [];
@@ -71,16 +71,16 @@ function new_show(val) {
         })
             .then(response => response.json())
             .then(data => data);
-        
+
         search_visible = true;
     }
 }
 
 //adds from search view
-function add_show(search_rss) {
-    $rss_list = [...$rss_list, {rss: search_rss, img: ''}];
+function add_show(search_rss, artwork) {
+    $rss_list = [...$rss_list, {rss: search_rss, img: artwork}];
     get_rss();
-    get_promises();
+    // get_promises(); // eval whether necessary, prefer 
     toggle_input();
 }
 
@@ -91,9 +91,12 @@ async function get_promises() {
         .then((promise_array) => update_list(promise_array));
 }
 
+// Adds the image arkwork of latest added show
 function update_list(prom) {
     for (let i = 0; i < prom.length; i++) {
-        $rss_list[i].img = prom[i].image;
+        if (i === prom.length - 1) {
+            $rss_list[i].img = prom[i].image;
+        }
     }
     console.log(prom);
     console.log($rss_list);
@@ -105,8 +108,8 @@ function update_list(prom) {
     <div class="heading">
         <div>
             <span style="float: left; padding-left: 10px;">podcasts</span>
-            <span class="option">⋯</span>
-            <span class="option" style="padding-right: 20px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>      
+            <!-- <span class="option">⋯</span> -->
+            <span class="option" style="padding-right: 15px;" on:click={toggle_input}>{!input_visible ? '+' : '-'}</span>      
         </div>
 
         {#if input_visible}          
@@ -122,7 +125,8 @@ function update_list(prom) {
         <div class="shows" in:fade={{duration: 800}}>
             {#each $rss_list as list, index}
                     <div class="show_div">
-                        <img class="show_img" src={list.img} on:click={() => display_episodes(index)} in:fade={{duration: 400}} 
+                        <img class="show_img" src={list.img} in:fade={{duration: 400}}
+                        on:click={() => display_episodes(index)}  
                         style:opacity={input_visible ? '0.6' : '1'}>
                         {#if input_visible}
                             <div class="rm_div" on:click={() => display_episodes(index)}>ⓧ</div>
@@ -140,11 +144,11 @@ function update_list(prom) {
             {:then results}
                 {#each results.results as result}
                     <div class="search_result">
-                        <div><img class="search_img" src={result.artworkUrl600}></div>
+                        <div><img class="search_img" src={result.artworkUrl100}></div>
                         <div class="search_txt">
                             <span class="ep_span">{result.trackName}</span>
                         </div>
-                        <div class="add_show" on:click={() => add_show(result.feedUrl)}>＋</div>
+                        <div class="add_show" on:click={() => add_show(result.feedUrl, result.artworkUrl600)}>＋</div>
                     </div>
                 {/each}  
             {/await}  
@@ -240,7 +244,7 @@ function update_list(prom) {
     font-size: 1.5rem;
     text-align: center;
     min-height: 50px;
-    line-height: 50px;
+    line-height: 48px;
     width: 100%;
     background-color: #1e1f29;
     position: relative;

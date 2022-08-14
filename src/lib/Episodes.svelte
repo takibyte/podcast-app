@@ -1,5 +1,5 @@
 <script>
-import { display_visible, player_visible, player_height, episodes_visible, icon, name, date, episode, description, mp3_url, url_index } from './stores.js';
+import { display_visible, player_visible, player_height, episodes_visible, icon, name, date, episode, description, mp3_url, url_index, rss_list } from './stores.js';
 import { promises, get_rss } from './get-rss.svelte';
 import { fade } from 'svelte/transition';
 
@@ -10,7 +10,7 @@ let days = [
 ]
 
 function display_ep(rss, pod) {
-    $icon =  rss.image;
+    $icon =  $rss_list[$url_index].img;
     $episode = pod.title;
     $date = display_date(pod.created);
     $name = rss.title;
@@ -35,7 +35,7 @@ function display_date(pod_created) {
 <div class="heading">
     <div>
         <span class="header">episodes</span>
-        <span class="option">⋯</span>
+        <!-- <span class="option">⋯</span> -->
     </div>
 </div>
 
@@ -44,7 +44,7 @@ function display_date(pod_created) {
 {:then rss}
     {#each rss.items as pod}
         <div class="episode" on:click={() => display_ep(rss, pod)} in:fade={{duration: 800}}>
-            <div class="ep_img"><img src={rss.image}></div>
+            <div class="ep_img"><img src={$rss_list[$url_index].img}></div>
             <div class="ep_txt">
                 <span class="ep-span">{pod.title}</span>
                 <span class="date ep-span">{display_date(pod.created)}</span>
@@ -60,7 +60,7 @@ function display_date(pod_created) {
     font-weight: 300;
     font-size: 1.5rem;
     min-height: 50px;
-    line-height: 50px;
+    line-height: 48px;
     width: 100%;
     background-color: #1e1f29;
     position: relative;
