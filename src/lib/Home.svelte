@@ -72,7 +72,7 @@ function new_show(val) {
             body: JSON.stringify({data: val})
         })
             .then(response => response.json())
-            .then(data => data);
+            .then(data => {return data});
 
         search_visible = true;
     }
