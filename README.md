@@ -1,4 +1,4 @@
-# Podcast catcher webapp
+# Podcast catcher web app
 
 https://pods.netlify.app/
 
