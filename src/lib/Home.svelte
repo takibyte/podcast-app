@@ -61,11 +61,12 @@ function new_show(val) {
     if (validate_url(val)) {
         $rss_list = [...$rss_list, {rss: new_rss, img: ''}];
         new_rss = "";
-        get_rss(); // for adding artwork from rss feed
+        get_rss($rss_list.length - 1); // for adding artwork from rss feed
         get_promises(); // for adding artwork from rss feed
         toggle_input();
     } else {
         search = [];
+        
 
         search = fetch('/.netlify/functions/search', {
             method: 'POST',
@@ -82,23 +83,25 @@ function new_show(val) {
 //adds from search view
 function add_show(search_rss, artwork) {
     $rss_list = [...$rss_list, {rss: search_rss, img: artwork}];
-    get_rss();
-    // get_promises(); // eval whether necessary, prefer 
     toggle_input();
 }
 
-// collect all promises and store each image in a local object
-// for faster loading of shows
+//// collect all promises and store each image in a local object
+//// for faster loading of shows
 async function get_promises() {
-    promise_array = await Promise.all(promises)
-        .then((promise_array) => update_list(promise_array));
+    promise_array = await promises
+        .then((promise) => update_list(promise));
+
+    ////old method
+    // promise_array = await Promise.all(promises)
+    //     .then((promise_array) => update_list(promise_array));
 }
 
 // Adds the image arkwork of latest added show
 function update_list(prom) {
-    for (let i = 0; i < prom.length; i++) {
-        if (i === prom.length - 1) {
-            $rss_list[i].img = prom[i].image;
+    for (let i = 0; i < $rss_list.length; i++) {
+        if (i === $rss_list.length - 1) {
+            $rss_list[i].img = prom.image;
         }
     }
     console.log(prom);

@@ -3,18 +3,15 @@ import { parse } from 'rss-to-json';
 exports.handler = async (event) => {
   const post_data = JSON.parse(event.body);
 
-  console.log(post_data.rss);
+  // console.log(post_data.rss);
 
-  let rss = [];
+  let rss = '';
 
-  for (let i = 0; i < post_data.rss.length; i++) {
-    rss[i] = parse(post_data.rss[i])
-      .then((response) => response)
-      .then((data) => data)
-      .catch((err) => err);
-  }
+  rss = await parse(post_data.rss)
+    .then((response) => response)
+    .then((data) => data);
 
-  console.log(rss);
+  // console.log(rss);
 
   return {
     statusCode: 200,

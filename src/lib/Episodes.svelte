@@ -7,7 +7,8 @@ let days = [
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 ]
 
-get_rss();
+get_rss($url_index);
+
 
 window.scrollTo(0, 0);
 
@@ -41,7 +42,7 @@ function display_date(pod_created) {
     </div>
 </div>
 
-{#await promises[$url_index]}
+{#await promises}
     <span>loading episodes...</span>
 {:then rss}
     {#each rss.items as pod}
