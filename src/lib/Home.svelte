@@ -282,7 +282,7 @@ input {
 .rm_div {
     position: absolute;
     top: 0;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     opacity: 0.9;
     text-align: center;
     width: 100%;
@@ -290,6 +290,10 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.rm_div:hover {
+    color: red;
 }
 
 .show_div:hover {
