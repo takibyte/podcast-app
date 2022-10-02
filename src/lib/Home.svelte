@@ -282,7 +282,7 @@ input {
 .rm_div {
     position: absolute;
     top: 0;
-    font-size: 3.5rem;
+    font-size: 3rem;
     opacity: 0.9;
     text-align: center;
     width: 100%;
