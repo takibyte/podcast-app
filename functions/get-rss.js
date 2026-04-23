@@ -1,21 +1,20 @@
 import { parse } from 'rss-to-json';
 
-exports.handler = async (event) => {
-  const post_data = JSON.parse(event.body);
+export const handler = async (event) => {
+  try {
+    const post_data = JSON.parse(event.body);
+    const rss = await parse(post_data.rss);
 
-  // console.log(post_data.rss);
-
-  let rss = '';
-
-  rss = await parse(post_data.rss)
-    .then((response) => response)
-    .then((data) => data);
-
-  // console.log(rss);
-
-  return {
-    statusCode: 200,
-    headers: JSON.stringify({ 'Access-Control-Allow-Origin': '*' }),
-    body: JSON.stringify(rss),
-  };
+    return {
+      statusCode: 200,
+      headers: { 'Access-Control-Allow-Origin': '*' },  // "headers" not "header"
+      body: JSON.stringify(rss),
+    };
+  } catch (err) {
+    console.error('get-rss error:', err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: err.message }),
+    };
+  }
 };

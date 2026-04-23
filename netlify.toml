@@ -3,6 +3,8 @@
   functions = "functions"
   publish = "docs"
 
+[functions]
+  node_bundler = "esbuild"
 
 [dev]
   framework = "vite"
