@@ -1,39 +1,9 @@
 {
     "podcast": [
         {
-            "Name": "The Tim Dillon Show",
-            "Episode": "184 - Prozac play-doh",
-            "Image": "./tds.jpeg"
-        },
-        {
             "Name": "Darknet Diaries",
             "Episode": "85 - lknslkd lklkjn",
             "Image": "./dd.jpeg"
-        },
-        {
-            "Name": "The Tim Dillon Show",
-            "Episode": "186 - pjpo",
-            "Image": "./tds.jpeg"
-        },
-        {
-            "Name": "Lex Fridman Podcast",
-            "Episode": "256 - jonon dsoi",
-            "Image": "./lfp.jpeg"
-        },
-        {
-            "Name": "The Tim Dillon Show",
-            "Episode": "188 - Pkbjbh",
-            "Image": "./tds.jpeg"
-        },
-        {
-            "Name": "Lex Fidman Podcast",
-            "Episode": "289 - kjbkjbkj",
-            "Image": "./lfp.jpeg"
-        },
-        {
-            "Name": "The Tim Dillon Show",
-            "Episode": "190 - oinlnlkn",
-            "Image": "./tds.jpeg"
         }
     ]
 }
